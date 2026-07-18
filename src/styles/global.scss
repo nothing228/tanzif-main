@@ -1,0 +1,336 @@
+/* ============ TANZIF design tokens ============ */
+:root {
+  /* palette — "clinical clean meets textile" */
+  --ink: #0b2e33;         /* foreground text (flips in dark theme) */
+  --paper: #f2f7f6;       /* page background */
+  --white: #ffffff;       /* raised light surface */
+  --aqua: #d3ab5c;        /* champagne gold accent (brand) */
+  --aqua-deep: #9a7b33;   /* accessible gold on light surfaces */
+  --gold: #d9a441;        /* rating stars, Gold tier */
+  --gold-hi: #ecd6a4;     /* gold gradient highlight */
+  --muted: #557075;       /* secondary text on light */
+  --muted-dark: #8fb0b4;  /* secondary text on deep surfaces (fixed) */
+  --line: #d5e2e0;        /* hairlines on light */
+  --stitch: rgba(11, 46, 51, 0.22); /* care-tag stitching */
+  --picked-bg: #faf4e4;   /* selected item highlight */
+  --header-bg: rgba(242, 247, 246, 0.88);
+
+  /* fixed deep surfaces — identical in both themes */
+  --deep: #0b2e33;
+  --deep-2: #123c42;
+  --deep-3: #1a4a52;
+  --on-deep: #f3f7f6;
+
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --radius: 16px;
+  --radius-lg: 24px;
+  --container: 1180px;
+  --shadow: 0 10px 34px rgba(11, 46, 51, 0.1);
+
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  --ink: #e4efed;
+  --paper: #0a2125;
+  --white: #103137;
+  --aqua-deep: #dcbb73;
+  --muted: #8fb0b4;
+  --line: #1e454c;
+  --stitch: rgba(243, 247, 246, 0.2);
+  --picked-bg: rgba(211, 171, 92, 0.14);
+  --header-bg: rgba(10, 33, 37, 0.88);
+  --shadow: 0 10px 34px rgba(0, 0, 0, 0.45);
+
+  color-scheme: dark;
+}
+
+/* ============ reset / base ============ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 84px;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+input,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+:focus-visible {
+  outline: 3px solid var(--aqua);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+::selection {
+  background: var(--aqua);
+  color: var(--deep);
+}
+
+/* ============ typography ============ */
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.18;
+  letter-spacing: 0.005em;
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ============ layout primitives ============ */
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+/* first section of a routed page clears the fixed header */
+main > section:first-child {
+  padding-top: 150px;
+}
+
+.section {
+  padding-block: 96px;
+
+  &--dark {
+    background: var(--deep);
+    color: var(--on-deep);
+  }
+
+  &--white {
+    background: var(--white);
+  }
+}
+
+.section-head {
+  max-width: 640px;
+  margin-bottom: 48px;
+
+  h2 {
+    font-size: clamp(1.6rem, 3.4vw, 2.4rem);
+    margin-bottom: 14px;
+  }
+
+  p {
+    color: var(--muted);
+    font-size: 1.06rem;
+  }
+
+  .section--dark & p {
+    color: var(--muted-dark);
+  }
+}
+
+/* ============ buttons ============ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 26px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.98rem;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+
+  &:active {
+    transform: scale(0.97);
+  }
+
+  &--primary {
+    background: linear-gradient(135deg, var(--gold-hi) 0%, var(--aqua) 100%);
+    color: var(--deep);
+    box-shadow: 0 6px 20px rgba(201, 162, 84, 0.35);
+
+    &:hover {
+      background: linear-gradient(135deg, #f2e0b8 0%, #ddb96b 100%);
+      transform: translateY(-1px);
+    }
+  }
+
+  &--ghost {
+    border: 1.5px solid var(--line);
+    background: var(--white);
+    color: var(--ink);
+
+    &:hover {
+      border-color: var(--aqua-deep);
+      color: var(--aqua-deep);
+    }
+  }
+
+  &--ghost-dark {
+    border: 1.5px solid var(--deep-3);
+    background: transparent;
+    color: var(--on-deep);
+
+    &:hover {
+      border-color: var(--aqua);
+      color: var(--aqua);
+    }
+  }
+}
+
+/* ============ signature: stitched care tag ============ */
+.care-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px 8px 12px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  position: relative;
+  box-shadow: 0 3px 10px rgba(11, 46, 51, 0.07);
+  margin-bottom: 22px;
+
+  /* stitching */
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 4px;
+    border: 1.5px dashed var(--stitch);
+    border-radius: 3px;
+    pointer-events: none;
+  }
+
+  /* tag hole */
+  &::after {
+    content: "";
+    position: absolute;
+    left: -5px;
+    top: 50%;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    transform: translate(-50%, -50%);
+  }
+
+  .care-tag__icon {
+    color: var(--aqua-deep);
+    flex-shrink: 0;
+  }
+
+  .care-tag__num {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .section--dark & {
+    background: var(--deep-2);
+    border-color: var(--deep-3);
+
+    &::before {
+      border-color: rgba(243, 247, 246, 0.2);
+    }
+
+    &::after {
+      background: var(--deep);
+      border-color: var(--deep-3);
+    }
+
+    .care-tag__icon {
+      color: var(--aqua);
+    }
+
+    .care-tag__num {
+      color: var(--muted-dark);
+    }
+  }
+}
+
+/* ============ reveal on scroll ============ */
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+
+  &.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .section {
+    padding-block: 64px;
+  }
+}

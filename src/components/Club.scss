@@ -1,0 +1,165 @@
+.club {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  align-items: start;
+
+  h3 {
+    font-size: 1.25rem;
+    margin-bottom: 20px;
+  }
+
+  .care-tag {
+    padding: 6px 12px 6px 10px;
+  }
+
+  /* ---- loyalty ---- */
+  &__perks {
+    display: flex;
+    flex-direction: column;
+
+    li {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      strong {
+        font-size: 0.96rem;
+      }
+
+      span {
+        font-size: 0.84rem;
+        color: var(--muted);
+      }
+    }
+  }
+
+  /* ---- membership tiers ---- */
+  &__tiers {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  &__tier {
+    border-radius: var(--radius);
+    padding: 22px 20px;
+    aspect-ratio: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 34px rgba(11, 46, 51, 0.2);
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    ul {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+
+      li {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.8rem;
+
+        svg {
+          flex-shrink: 0;
+        }
+      }
+    }
+
+    &--gold {
+      background: linear-gradient(140deg, #f3e2bd 0%, #d9a441 100%);
+      color: #4a3510;
+
+      .club__tier-join {
+        color: #4a3510;
+        border-color: rgba(74, 53, 16, 0.35);
+      }
+    }
+
+    &--platinum {
+      background: linear-gradient(140deg, #eef1f3 0%, #b9c4cb 100%);
+      color: #2e3a40;
+
+      .club__tier-join {
+        color: #2e3a40;
+        border-color: rgba(46, 58, 64, 0.35);
+      }
+    }
+
+    &--black {
+      background: linear-gradient(140deg, #232a2d 0%, #0a0f10 100%);
+      color: #e8eceb;
+
+      li svg {
+        color: var(--aqua);
+      }
+
+      .club__tier-join {
+        color: var(--aqua);
+        border-color: rgba(201, 162, 84, 0.4);
+      }
+    }
+  }
+
+  &__tier-logo {
+    opacity: 0.9;
+  }
+
+  &__tier-name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  &__tier-join {
+    align-self: flex-start;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    padding: 7px 14px;
+    border: 1.5px solid;
+    border-radius: 999px;
+    transition: opacity 0.15s ease;
+
+    &:hover {
+      opacity: 0.75;
+    }
+  }
+}
+
+@media (max-width: 1000px) {
+  .club {
+    grid-template-columns: 1fr;
+
+    &__tiers {
+      max-width: 720px;
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .club__tiers {
+    grid-template-columns: 1fr;
+  }
+}

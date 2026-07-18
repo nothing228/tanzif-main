@@ -1,0 +1,214 @@
+.personal {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  align-items: start;
+
+  &__col {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  &__card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 28px;
+  }
+
+  &__card-head {
+    margin-bottom: 20px;
+
+    h3 {
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+    }
+
+    p {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .care-tag {
+      margin-bottom: 16px;
+      padding: 6px 12px 6px 10px;
+    }
+  }
+
+  /* ---- passport document ---- */
+  &__doc {
+    position: relative;
+    display: grid;
+    grid-template-columns: 96px 1fr;
+    gap: 18px;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 20px;
+    padding-bottom: 44px;
+  }
+
+  &__doc-photo {
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__doc-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    div {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      border-bottom: 1px dotted var(--line);
+      padding-bottom: 6px;
+    }
+
+    dt {
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    dd {
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-align: right;
+    }
+  }
+
+  &__doc-id {
+    position: absolute;
+    left: 20px;
+    bottom: 14px;
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    color: var(--aqua-deep);
+  }
+
+  /* ---- wardrobe ---- */
+  &__wardrobe {
+    display: flex;
+    flex-direction: column;
+
+    li {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 13px 0;
+      border-bottom: 1px solid var(--line);
+
+      &:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+
+      > div {
+        flex: 1;
+
+        strong {
+          display: block;
+          font-size: 0.94rem;
+        }
+
+        span {
+          font-size: 0.8rem;
+          color: var(--muted);
+        }
+      }
+    }
+  }
+
+  &__w-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: var(--white);
+    border: 1px solid var(--line);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--aqua-deep);
+    flex-shrink: 0;
+  }
+
+  &__w-years {
+    font-size: 0.74rem;
+    color: var(--muted);
+  }
+
+  /* ---- reminders ---- */
+  &__notifs {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  &__notif {
+    display: flex;
+    gap: 12px;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 14px 16px;
+    box-shadow: 0 3px 12px rgba(11, 46, 51, 0.06);
+
+    > div {
+      flex: 1;
+
+      strong {
+        display: block;
+        font-size: 0.88rem;
+      }
+
+      p {
+        font-size: 0.82rem;
+        color: var(--muted);
+      }
+    }
+  }
+
+  &__notif-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+    background: var(--deep);
+    color: var(--aqua);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  &__notif-time {
+    font-size: 0.68rem;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 900px) {
+  .personal {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .personal__doc {
+    grid-template-columns: 1fr;
+
+    &-photo {
+      max-width: 120px;
+    }
+  }
+}

@@ -1,0 +1,132 @@
+.sticky-flow {
+  background: var(--white);
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 0.78fr 1.22fr;
+    gap: 56px;
+    align-items: start;
+  }
+
+  /* ---- the one sticky column ---- */
+  &__head {
+    position: sticky;
+    top: 140px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  &__stack {
+    position: relative;
+    /* the tallest card sets the height — the rest are stacked on top of it */
+    min-height: 260px;
+  }
+
+  &__card {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transform: translateY(14px);
+    pointer-events: none;
+    transition: opacity 0.45s ease, transform 0.45s ease;
+
+    &.is-active {
+      opacity: 1;
+      transform: none;
+      pointer-events: auto;
+    }
+
+    h2 {
+      font-size: clamp(1.6rem, 3.2vw, 2.3rem);
+      margin-bottom: 14px;
+    }
+
+    p {
+      color: var(--muted);
+      font-size: 1.02rem;
+      max-width: 360px;
+    }
+
+    .care-tag {
+      margin-bottom: 18px;
+    }
+  }
+
+  &__dots {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+
+    span {
+      width: 22px;
+      height: 3px;
+      border-radius: 2px;
+      background: var(--line);
+      transition: background 0.35s ease;
+
+      &.is-active {
+        background: var(--aqua-deep);
+      }
+    }
+  }
+
+  /* ---- panels ---- */
+  &__panels {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 96px;
+  }
+
+  &__panel {
+    min-width: 0;
+    scroll-margin-top: 96px;
+  }
+
+  &__panel-head {
+    display: none;
+    margin-bottom: 22px;
+
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+    }
+
+    p {
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .care-tag {
+      margin-bottom: 14px;
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .sticky-flow {
+    &__grid {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+
+    &__head {
+      display: none;
+    }
+
+    &__panels {
+      gap: 64px;
+    }
+
+    &__panel-head {
+      display: block;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sticky-flow__card {
+    transition: none;
+  }
+}

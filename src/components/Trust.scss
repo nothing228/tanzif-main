@@ -1,0 +1,55 @@
+.trust-section {
+  padding-block: 80px;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% -10%, rgba(201, 162, 84, 0.1), transparent),
+    var(--paper);
+}
+
+.trust {
+  display: grid;
+  /* two columns: the sticky heading takes the rest of the row */
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+
+  &__item {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 26px 24px;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+
+    &:hover {
+      transform: translateY(-4px);
+      border-color: var(--aqua-deep);
+    }
+
+    h3 {
+      font-size: 1.05rem;
+      margin-bottom: 6px;
+    }
+
+    p {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+  }
+
+  &__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background: var(--picked-bg);
+    border: 1px solid var(--line);
+    color: var(--aqua-deep);
+    margin-bottom: 16px;
+  }
+}
+
+@media (max-width: 520px) {
+  .trust {
+    grid-template-columns: 1fr;
+  }
+}

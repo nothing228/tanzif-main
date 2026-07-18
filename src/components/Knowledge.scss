@@ -1,0 +1,142 @@
+.knowledge {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  align-items: start;
+
+  &__cards {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  &__card {
+    position: relative;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 20px 24px 20px 64px;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+
+    &:hover {
+      border-color: var(--aqua-deep);
+      transform: translateX(4px);
+    }
+
+    h3 {
+      font-size: 1.02rem;
+      margin-bottom: 4px;
+    }
+
+    p {
+      font-size: 0.86rem;
+      color: var(--muted);
+    }
+  }
+
+  &__num {
+    position: absolute;
+    left: 22px;
+    top: 22px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--aqua-deep);
+  }
+
+  /* ---- interactive search ---- */
+  &__search {
+    background: var(--deep);
+    color: var(--on-deep);
+    border-radius: var(--radius-lg);
+    padding: 30px;
+
+    h3 {
+      font-size: 1.15rem;
+      margin-bottom: 18px;
+    }
+  }
+
+  &__input {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--deep-2);
+    border: 1px solid var(--deep-3);
+    border-radius: 999px;
+    padding: 12px 20px;
+    margin-bottom: 16px;
+    color: var(--muted-dark);
+
+    input {
+      flex: 1;
+      background: none;
+      border: none;
+      outline: none;
+      color: var(--on-deep);
+      font-size: 0.94rem;
+
+      &::placeholder {
+        color: var(--muted-dark);
+      }
+    }
+  }
+
+  &__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  &__chip {
+    padding: 8px 16px;
+    border-radius: 999px;
+    border: 1px solid var(--deep-3);
+    font-size: 0.82rem;
+    color: var(--on-deep);
+    transition: all 0.15s ease;
+
+    &:hover {
+      border-color: var(--aqua);
+      color: var(--aqua);
+    }
+
+    &.is-active {
+      background: var(--aqua);
+      border-color: var(--aqua);
+      color: var(--deep);
+      font-weight: 600;
+    }
+  }
+
+  &__answer {
+    margin-top: 18px;
+    padding: 16px 18px;
+    background: var(--deep-2);
+    border-left: 3px solid var(--aqua);
+    border-radius: 0 12px 12px 0;
+    font-size: 0.9rem;
+    color: var(--muted-dark);
+    animation: answer-in 0.3s ease both;
+
+    strong {
+      color: var(--on-deep);
+    }
+  }
+}
+
+@keyframes answer-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .knowledge {
+    grid-template-columns: 1fr;
+  }
+}

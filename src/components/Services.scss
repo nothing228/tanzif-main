@@ -1,0 +1,206 @@
+.services-section {
+  background: var(--white);
+}
+
+.services {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 60px;
+  align-items: start;
+
+  /* ---- sticky left column ---- */
+  &__sticky {
+    position: sticky;
+    top: 140px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  &__stack {
+    position: relative;
+    /* tallest card decides the height — the others are stacked on top */
+    min-height: 300px;
+  }
+
+  &__card {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    opacity: 0;
+    transform: translateY(14px);
+    pointer-events: none;
+    transition: opacity 0.45s ease, transform 0.45s ease;
+
+    &.is-active {
+      opacity: 1;
+      transform: none;
+      pointer-events: auto;
+    }
+
+    h3 {
+      font-size: clamp(1.9rem, 3.4vw, 2.8rem);
+      line-height: 1.1;
+      margin-bottom: 14px;
+    }
+
+    p {
+      color: var(--muted);
+      font-size: 1.02rem;
+      max-width: 340px;
+      margin-bottom: 26px;
+    }
+  }
+
+  &__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 62px;
+    height: 62px;
+    border-radius: 18px;
+    background: var(--picked-bg);
+    border: 1px solid var(--line);
+    color: var(--aqua-deep);
+    margin-bottom: 22px;
+    flex-shrink: 0;
+  }
+
+  &__cta {
+    margin-top: auto;
+  }
+
+  &__dots {
+    display: flex;
+    gap: 7px;
+
+    span {
+      width: 24px;
+      height: 3px;
+      border-radius: 2px;
+      background: var(--line);
+      transition: background 0.35s ease;
+
+      &.is-active {
+        background: var(--aqua-deep);
+      }
+    }
+  }
+
+  /* ---- scrolling panels ---- */
+  &__panels {
+    display: flex;
+    flex-direction: column;
+    gap: 90px;
+  }
+
+  &__panel {
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+  }
+
+  /* heading duplicated inside each panel for phones */
+  &__panel-head {
+    display: none;
+
+    h3 {
+      font-size: 1.6rem;
+      margin-bottom: 8px;
+    }
+
+    p {
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+  }
+
+  &__visual {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+  }
+
+  &__swatch {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__features {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+
+    li {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+
+      strong {
+        display: block;
+        font-family: var(--font-display);
+        font-size: 1.12rem;
+        font-weight: 600;
+        margin-bottom: 5px;
+      }
+
+      p {
+        color: var(--muted);
+        font-size: 0.94rem;
+        max-width: 460px;
+      }
+    }
+  }
+
+  &__feature-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    border: 1.5px solid var(--aqua-deep);
+    color: var(--aqua-deep);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+}
+
+@media (max-width: 900px) {
+  .services {
+    grid-template-columns: 1fr;
+    gap: 0;
+
+    &__sticky {
+      display: none;
+    }
+
+    &__panels {
+      gap: 56px;
+    }
+
+    &__panel-head {
+      display: block;
+    }
+
+    &__icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      margin-bottom: 14px;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .services__card {
+    transition: none;
+  }
+}

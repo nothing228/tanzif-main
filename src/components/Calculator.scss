@@ -1,0 +1,368 @@
+.calc {
+  display: grid;
+  grid-template-columns: 1.4fr 0.85fr;
+  gap: 32px;
+  align-items: start;
+
+  /* ---- catalog ---- */
+  &__catalog {
+    min-width: 0;
+  }
+
+  &__search {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--paper);
+    border: 1.5px solid var(--line);
+    border-radius: 999px;
+    padding: 12px 20px;
+    margin-bottom: 14px;
+    color: var(--muted);
+
+    &:focus-within {
+      border-color: var(--aqua-deep);
+      color: var(--aqua-deep);
+    }
+
+    input {
+      flex: 1;
+      min-width: 0;
+      background: none;
+      border: none;
+      outline: none;
+      color: var(--ink);
+      font-size: 0.96rem;
+
+      &::placeholder {
+        color: var(--muted);
+        opacity: 0.7;
+      }
+    }
+  }
+
+  &__depts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  &__dept {
+    padding: 7px 15px;
+    border-radius: 999px;
+    border: 1.5px solid var(--line);
+    background: var(--white);
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--muted);
+    white-space: nowrap;
+    transition: all 0.18s ease;
+
+    &:hover {
+      border-color: var(--aqua-deep);
+      color: var(--aqua-deep);
+    }
+
+    &.is-active {
+      background: var(--deep);
+      border-color: var(--deep);
+      color: var(--on-deep);
+    }
+  }
+
+  &__count {
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+
+  /* ---- receipt ---- */
+  &__receipt {
+    position: sticky;
+    top: 96px;
+    background: var(--deep);
+    color: var(--on-deep);
+    border-radius: var(--radius-lg);
+    padding: 30px 28px;
+    box-shadow: var(--shadow);
+
+    /* perforated receipt edge */
+    &::after {
+      content: "";
+      position: absolute;
+      left: 16px;
+      right: 16px;
+      bottom: -1px;
+      height: 10px;
+      background-image: radial-gradient(circle at 5px 0, var(--white) 5px, transparent 5.5px);
+      background-size: 18px 10px;
+      background-repeat: repeat-x;
+    }
+
+    h3 {
+      font-size: 0.85rem;
+      letter-spacing: 0.32em;
+      color: var(--aqua);
+      margin-bottom: 18px;
+    }
+  }
+
+  &__receipt-hole {
+    position: absolute;
+    top: 22px;
+    right: 24px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #fff;
+    opacity: 0.15;
+  }
+
+  &__receipt-lines {
+    border-bottom: 1.5px dashed var(--deep-3);
+    padding-bottom: 14px;
+    margin-bottom: 14px;
+    max-height: 240px;
+    overflow-y: auto;
+
+    li {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 0.82rem;
+      padding: 4px 0;
+      color: var(--muted-dark);
+
+      .mono {
+        color: var(--on-deep);
+        flex-shrink: 0;
+      }
+    }
+  }
+
+  &__receipt-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    padding: 5px 0;
+    font-size: 0.92rem;
+    color: var(--muted-dark);
+
+    .mono {
+      color: var(--on-deep);
+      font-weight: 600;
+    }
+
+    &--total {
+      font-size: 1rem;
+
+      .mono {
+        font-size: 1.35rem;
+        color: var(--aqua);
+      }
+    }
+  }
+
+  &__free {
+    font-weight: 700;
+    color: var(--aqua);
+  }
+
+  &__order {
+    width: 100%;
+    margin-top: 18px;
+  }
+
+  &__sent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 18px;
+    padding: 13px;
+    border-radius: 999px;
+    border: 1.5px solid var(--aqua);
+    color: var(--aqua);
+    font-size: 0.86rem;
+    font-weight: 600;
+    text-align: center;
+
+    svg {
+      flex-shrink: 0;
+    }
+  }
+
+  &__note {
+    margin-top: 12px;
+    font-size: 0.74rem;
+    color: var(--muted-dark);
+    text-align: center;
+  }
+
+  &__empty {
+    color: var(--muted-dark);
+    font-size: 0.95rem;
+    padding: 30px 0 40px;
+    text-align: center;
+
+    &--search {
+      color: var(--muted);
+    }
+  }
+}
+
+/* ---- one price row inside the AnimatedList ---- */
+.price-row {
+  display: grid;
+  grid-template-columns: 44px 1fr auto auto;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+
+  &__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--white);
+    border: 1px solid var(--line);
+    color: var(--ink);
+    flex-shrink: 0;
+    transition: color 0.2s ease, border-color 0.2s ease;
+
+    .is-picked & {
+      color: var(--aqua-deep);
+      border-color: var(--aqua-deep);
+    }
+  }
+
+  &__main {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  &__name {
+    font-weight: 600;
+    font-size: 0.88rem;
+    line-height: 1.35;
+  }
+
+  &__group {
+    font-size: 0.66rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+  }
+
+  &__price {
+    font-size: 0.74rem;
+    color: var(--muted);
+    white-space: nowrap;
+
+    .is-picked & {
+      color: var(--aqua-deep);
+      font-weight: 600;
+    }
+  }
+
+  &__stepper {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 3px;
+    flex-shrink: 0;
+    cursor: default;
+
+    button {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      font-size: 1.05rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s ease;
+
+      &:hover:not(:disabled) {
+        background: var(--paper);
+      }
+
+      &:disabled {
+        opacity: 0.3;
+        cursor: default;
+      }
+    }
+
+    > span {
+      min-width: 18px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 0.86rem;
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .calc {
+    grid-template-columns: 1fr;
+
+    /* relative, not static: the perforated edge and the hole are absolute
+       children and would otherwise escape onto the price list */
+    &__receipt {
+      position: relative;
+      top: auto;
+    }
+
+    /* one swipeable row instead of seven stacked lines */
+    &__depts {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding-bottom: 4px;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    &__dept {
+      flex-shrink: 0;
+    }
+  }
+
+  .price-row {
+    grid-template-columns: 44px 1fr auto;
+    grid-template-areas:
+      "icon main stepper"
+      "icon price stepper";
+    gap: 2px 12px;
+
+    &__icon {
+      grid-area: icon;
+      align-self: center;
+    }
+
+    &__main {
+      grid-area: main;
+    }
+
+    &__price {
+      grid-area: price;
+      white-space: normal;
+    }
+
+    &__stepper {
+      grid-area: stepper;
+    }
+  }
+}
