@@ -221,7 +221,8 @@
     }
   }
 
-  &__operator {
+  /* escalation to a human — appears in the chat flow after the first answer */
+  &__admin {
     align-self: center;
     margin-top: 6px;
     padding: 11px 22px;

@@ -22,3 +22,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# secrets — never commit the API key
+.env
+.env.*
+!.env.example
+
+# netlify
+.netlify

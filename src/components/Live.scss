@@ -1,3 +1,23 @@
+:root[data-theme="dark"] {
+  .live {
+    &__screen {
+      background: linear-gradient(155deg, #1a1610 0%, #060504 100%);
+    }
+
+    &__blob {
+      background: #4a3c1f;
+
+      &--2 {
+        background: #3a2f18;
+      }
+
+      &--3 {
+        background: #5c4a26;
+      }
+    }
+  }
+}
+
 .live {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

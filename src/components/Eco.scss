@@ -1,23 +1,28 @@
 :root[data-theme="dark"] {
   .eco {
-    background: #10312a;
-    border-color: #1d4a3d;
+    background: #16130f;
+    border-color: #2c2620;
+
+    &__month {
+      background: linear-gradient(135deg, var(--gold-hi), var(--aqua));
+      color: #1a1409;
+    }
 
     &__stat {
-      background: #0e2c25;
-      border-left-color: #3aa87c;
+      background: #100e0b;
+      border-left-color: var(--aqua);
     }
 
     &__value {
-      color: #7fd8b5;
+      color: var(--aqua-deep);
 
       small {
-        color: #5da88a;
+        color: #b8a072;
       }
     }
 
     &__label {
-      color: #9cc4b2;
+      color: var(--muted);
     }
   }
 }

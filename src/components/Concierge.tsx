@@ -3,6 +3,7 @@ import { useLang } from "../i18n/LangContext";
 import { useReveal } from "../hooks/useReveal";
 import { useAuthGate } from "./AuthGate";
 import { findItems, findStain, isGreeting } from "../data/concierge";
+import { CONTACTS } from "../data/contacts";
 import { IconSend } from "./icons";
 import "./Concierge.scss";
 
@@ -25,9 +26,13 @@ export function Concierge() {
   const chatRef = useRef<HTMLDivElement>(null);
   const greeted = useRef(false);
 
+  // plain-text transcript sent to the API — the rendered msgs carry extra structure
+  const history = useRef<{ role: "user" | "assistant"; content: string }[]>([]);
+
   // greeting appears when the section scrolls into view; refresh on language change
   useEffect(() => {
     setMsgs([{ from: "ai", text: t.concierge.greeting }]);
+    history.current = [];
     greeted.current = true;
   }, [t]);
 
@@ -36,12 +41,39 @@ export function Concierge() {
     if (el) el.scrollTop = el.scrollHeight;
   }, [msgs, typing]);
 
-  const respond = (question: string) => {
+  /** flattens a rendered message back to text so the transcript stays coherent */
+  const flatten = (m: Msg): string =>
+    [...(m.rows ?? []).map((r) => `${r.label}: ${r.value}`), m.text, m.note]
+      .filter(Boolean)
+      .join(". ");
+
+  const respond = async (question: string) => {
     setTyping(true);
-    window.setTimeout(() => {
+    history.current.push({ role: "user", content: question });
+
+    try {
+      const res = await fetch("/.netlify/functions/concierge", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: history.current, lang }),
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+      const data: unknown = await res.json();
+      const reply = (data as { reply?: unknown })?.reply;
+      if (typeof reply !== "string" || !reply.trim()) throw new Error("Malformed reply");
+
+      history.current.push({ role: "assistant", content: reply });
+      setMsgs((m) => [...m, { from: "ai", text: reply }]);
+    } catch {
+      // API unreachable or misconfigured — fall back to the offline rule engine
+      // so the widget still answers the common price and stain questions
+      const answer = buildAnswer(question);
+      history.current.push({ role: "assistant", content: flatten(answer) });
+      setMsgs((m) => [...m, answer]);
+    } finally {
       setTyping(false);
-      setMsgs((m) => [...m, buildAnswer(question)]);
-    }, 900);
+    }
   };
 
   const buildAnswer = (question: string): Msg => {
@@ -72,6 +104,10 @@ export function Concierge() {
     }
     return { from: "ai", text: t.concierge.fallback };
   };
+
+  // the greeting is the first AI message, so a second one means the concierge
+  // has actually answered something — only then is escalating to a human useful
+  const answered = msgs.filter((m) => m.from === "ai").length > 1;
 
   const send = () => {
     const q = input.trim();
@@ -128,6 +164,17 @@ export function Concierge() {
                   </span>
                   {t.concierge.typing}
                 </div>
+              )}
+
+              {answered && (
+                <a
+                  className="btn btn--ghost concierge__admin"
+                  href={CONTACTS.telegramAdmin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {t.concierge.admin}
+                </a>
               )}
             </div>
 

@@ -2,6 +2,12 @@
   min-height: calc(100vh - 72px);
 }
 
+:root[data-theme="dark"] .profile__card {
+  background:
+    radial-gradient(ellipse 120% 90% at 10% 0%, rgba(230, 198, 127, 0.26), transparent 60%),
+    linear-gradient(150deg, #1c1810 0%, #0d0b08 55%, #050505 100%);
+}
+
 .profile {
   display: grid;
   grid-template-columns: 0.9fr 1.1fr;

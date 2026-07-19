@@ -1,3 +1,4 @@
+import { CONTACTS } from "../data/contacts";
 import { useLang } from "../i18n/LangContext";
 import { CareDry, CareDryClean, CareHand, CareIron, CareWash } from "./icons";
 import { Logo, LogoWord } from "./Logo";
@@ -34,12 +35,20 @@ export function Footer() {
               {t.footer.phone2}
             </a>
             <a
-              href="https://t.me/tanzif_uz"
+              href={CONTACTS.telegram}
               target="_blank"
               rel="noreferrer"
               className="mono"
             >
               {t.footer.telegram}
+            </a>
+            <a
+              href={CONTACTS.instagram}
+              target="_blank"
+              rel="noreferrer"
+              className="mono"
+            >
+              {t.footer.instagram}
             </a>
           </div>
 

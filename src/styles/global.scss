@@ -15,7 +15,7 @@
   --picked-bg: #faf4e4;   /* selected item highlight */
   --header-bg: rgba(242, 247, 246, 0.88);
 
-  /* fixed deep surfaces — identical in both themes */
+  /* deep surfaces — teal in light theme, black in dark theme */
   --deep: #0b2e33;
   --deep-2: #123c42;
   --deep-3: #1a4a52;
@@ -33,17 +33,27 @@
   color-scheme: light;
 }
 
+/* dark theme — black & gold */
 :root[data-theme="dark"] {
-  --ink: #e4efed;
-  --paper: #0a2125;
-  --white: #103137;
-  --aqua-deep: #dcbb73;
-  --muted: #8fb0b4;
-  --line: #1e454c;
-  --stitch: rgba(243, 247, 246, 0.2);
+  --ink: #f4ecdc;         /* warm off-white text */
+  --paper: #0a0908;       /* near-black page */
+  --white: #16130f;       /* raised dark surface */
+  --aqua-deep: #e6c67f;   /* brighter gold — accessible on black */
+  --gold: #e0b357;
+  --gold-hi: #f2dfb0;
+  --muted: #a2988a;       /* warm grey secondary */
+  --muted-dark: #a2988a;
+  --line: #2c2620;        /* hairlines on black */
+  --stitch: rgba(211, 171, 92, 0.3);
   --picked-bg: rgba(211, 171, 92, 0.14);
-  --header-bg: rgba(10, 33, 37, 0.88);
-  --shadow: 0 10px 34px rgba(0, 0, 0, 0.45);
+  --header-bg: rgba(10, 9, 8, 0.88);
+  --shadow: 0 10px 34px rgba(0, 0, 0, 0.6);
+
+  /* deep surfaces turn black so dark sections match the page */
+  --deep: #050505;
+  --deep-2: #121009;
+  --deep-3: #332c1e;      /* gold-tinted border on black */
+  --on-deep: #f4ecdc;
 
   color-scheme: dark;
 }

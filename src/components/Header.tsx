@@ -5,6 +5,7 @@ import { useTheme } from "../hooks/ThemeContext";
 import { useMediaQuery } from "../hooks/useMediaQuery";
 import { useScrollSpy } from "../hooks/useScrollSpy";
 import { useAuth } from "../auth/AuthContext";
+import { CONTACTS } from "../data/contacts";
 import type { LocaleKey } from "../i18n/translations";
 import { AnchorLink } from "./AnchorLink";
 import { StaggeredMenu } from "./StaggeredMenu";
@@ -129,8 +130,9 @@ export function Header() {
             <StaggeredMenu
               items={menuItems}
               socialItems={[
-                { label: "Telegram", link: "https://t.me/tanzif_uz" },
-                { label: t.footer.phone, link: "tel:+998935705150" },
+                { label: "Telegram", link: CONTACTS.telegram },
+                { label: "Instagram", link: CONTACTS.instagram },
+                { label: t.footer.phone, link: `tel:${CONTACTS.phone}` },
               ]}
               socialsTitle={t.footer.contact}
               menuLabel={t.nav.menu}
@@ -138,10 +140,10 @@ export function Header() {
               displayItemNumbering
               displaySocials
               colors={["#ecd6a4", "#d3ab5c"]}
-              accentColor="#9a7b33"
+              accentColor={theme === "dark" ? "#e6c67f" : "#9a7b33"}
               /* the panel uses the page background, so the label keeps the theme's ink colour */
-              menuButtonColor={theme === "dark" ? "#e4efed" : "#0b2e33"}
-              openMenuButtonColor={theme === "dark" ? "#e4efed" : "#0b2e33"}
+              menuButtonColor={theme === "dark" ? "#f4ecdc" : "#0b2e33"}
+              openMenuButtonColor={theme === "dark" ? "#f4ecdc" : "#0b2e33"}
             />
           )}
         </div>
