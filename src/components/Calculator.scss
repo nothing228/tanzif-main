@@ -100,12 +100,20 @@
       background-repeat: repeat-x;
     }
 
+    /* wordmark, then the label naming what this panel is */
     h3 {
       font-size: 0.85rem;
       letter-spacing: 0.32em;
       color: var(--aqua);
-      margin-bottom: 18px;
+      margin-bottom: 6px;
     }
+  }
+
+  &__receipt-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--on-deep);
+    margin-bottom: 18px;
   }
 
   &__receipt-hole {

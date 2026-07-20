@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useLang } from "../i18n/LangContext";
 import { useReveal } from "../hooks/useReveal";
 import { AnchorLink, scrollToSection } from "../components/AnchorLink";
@@ -26,13 +26,15 @@ import {
   CareHand,
   IconBag,
   IconCamera,
+  IconCoat,
   IconLeaf,
+  IconShield,
   IconStar,
   Sparkle,
 } from "../components/icons";
 import "./Home.scss";
 
-const TEASER_ICONS = [IconBag, IconCamera, Sparkle, IconStar];
+const TEASER_ICONS = [IconBag, IconCamera, Sparkle, IconStar, IconShield, IconCoat];
 
 function EcosystemTeasers() {
   const { t } = useLang();
@@ -42,14 +44,8 @@ function EcosystemTeasers() {
     <div className="teasers reveal" ref={ref}>
       {t.home.cards.map((card, i) => {
         const Icon = TEASER_ICONS[i];
-        return (
-          <SpotlightCard
-            key={card.to}
-            as={AnchorLink}
-            id={card.to}
-            className="teasers__card"
-            spotlightColor="rgba(201, 162, 84, 0.45)"
-          >
+        const body = (
+          <>
             <span className="teasers__icon">
               <Icon size={22} />
             </span>
@@ -58,6 +54,30 @@ function EcosystemTeasers() {
             <span className="teasers__arrow" aria-hidden>
               →
             </span>
+          </>
+        );
+        /* Most cards scroll to a section on this page; the cabinet card leaves
+           for /profile. Spelled out rather than spread, so `as` stays concrete
+           and SpotlightCard can infer the element type. */
+        return card.route ? (
+          <SpotlightCard
+            key={card.title}
+            as={Link}
+            to={card.route}
+            className="teasers__card"
+            spotlightColor="rgba(201, 162, 84, 0.45)"
+          >
+            {body}
+          </SpotlightCard>
+        ) : (
+          <SpotlightCard
+            key={card.title}
+            as={AnchorLink}
+            id={card.to}
+            className="teasers__card"
+            spotlightColor="rgba(201, 162, 84, 0.45)"
+          >
+            {body}
           </SpotlightCard>
         );
       })}

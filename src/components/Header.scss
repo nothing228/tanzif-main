@@ -82,7 +82,13 @@
     }
   }
 
+  /* Gold floods up from the bottom, a sheen crosses it, and the pill lifts —
+     the one control on the header that should feel worth pressing. Both
+     pseudo-elements sit behind the label via the isolate/z-index pair. */
   &__login {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
     display: inline-flex;
     align-items: center;
     padding: 8px 15px;
@@ -93,10 +99,56 @@
     font-weight: 600;
     white-space: nowrap;
     flex-shrink: 0;
-    transition: background 0.15s ease, color 0.15s ease;
+    transition: color 0.3s ease, border-color 0.3s ease, transform 0.25s ease,
+      box-shadow 0.35s ease;
 
-    &:hover {
-      background: var(--picked-bg);
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(135deg, var(--gold-hi) 0%, #d3ab5c 100%);
+      transform: translateY(101%);
+      transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -60%;
+      width: 45%;
+      height: 100%;
+      z-index: -1;
+      background: linear-gradient(
+        100deg,
+        transparent,
+        rgba(255, 255, 255, 0.55),
+        transparent
+      );
+      transform: skewX(-18deg);
+      opacity: 0;
+    }
+
+    &:hover,
+    &:focus-visible {
+      color: var(--deep);
+      border-color: var(--gold-hi);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(201, 162, 84, 0.38);
+
+      &::before {
+        transform: translateY(0);
+      }
+
+      /* fires once the fill has landed, so the shine reads as light on gold */
+      &::after {
+        animation: header-login-sheen 0.75s 0.14s ease-out;
+      }
+    }
+
+    &:active {
+      transform: translateY(0) scale(0.97);
     }
   }
 
@@ -183,6 +235,34 @@
     flex-shrink: 0;
   }
 
+}
+
+@keyframes header-login-sheen {
+  from {
+    left: -60%;
+    opacity: 0;
+  }
+  35% {
+    opacity: 1;
+  }
+  to {
+    left: 115%;
+    opacity: 0;
+  }
+}
+
+/* the fill still reads as a state change without the travelling highlight */
+@media (prefers-reduced-motion: reduce) {
+  .header__login {
+    &::before {
+      transition-duration: 0.01ms;
+    }
+
+    &:hover::after,
+    &:focus-visible::after {
+      animation: none;
+    }
+  }
 }
 
 /* narrow phones: trim the controls so the menu toggle keeps its place */

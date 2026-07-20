@@ -201,6 +201,7 @@ export function Calculator() {
           <aside className="calc__receipt">
             <div className="calc__receipt-hole" aria-hidden />
             <h3 className="mono">TANZIF</h3>
+            <p className="calc__receipt-title">{t.calc.receiptTitle}</p>
 
             {hasItems ? (
               <>

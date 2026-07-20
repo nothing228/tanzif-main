@@ -4,12 +4,13 @@ import { Swatch } from "./Swatch";
 import type { SwatchVariant } from "./Swatch";
 import { AnchorLink } from "./AnchorLink";
 import {
-  IconBag,
-  IconCarpet,
+  IconBed,
   IconCheck,
   IconCoat,
-  IconCurtain,
+  IconShoe,
   IconSofa,
+  IconSpray,
+  IconStroller,
 } from "./icons";
 import "./Services.scss";
 
@@ -19,7 +20,9 @@ import "./Services.scss";
  * carries its own heading and the sticky column is dropped.
  */
 
-const ICONS = [IconCoat, IconCarpet, IconSofa, IconCurtain, IconBag];
+/* order follows t.services.items: clothes, shoes, home textiles, kids,
+   furniture, dyeing */
+const ICONS = [IconCoat, IconShoe, IconBed, IconStroller, IconSofa, IconSpray];
 
 export function Services() {
   const { t } = useLang();
@@ -117,7 +120,18 @@ export function Services() {
                   </div>
 
                   <div className="services__visual">
+                    {/* The woven pattern sits underneath. The photo starts
+                        transparent and only fades in once it actually decodes —
+                        the SPA catch-all answers a missing file with 200 HTML
+                        rather than a 404, so onError alone would not catch it. */}
                     <Swatch variant={s.swatch as SwatchVariant} className="services__swatch" />
+                    <img
+                      className="services__photo"
+                      src={`/services/${s.photo}.jpg`}
+                      alt={s.name}
+                      loading="lazy"
+                      onLoad={(e) => e.currentTarget.classList.add("is-loaded")}
+                    />
                   </div>
 
                   <ul className="services__features">
