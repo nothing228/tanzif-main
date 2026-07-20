@@ -38,8 +38,12 @@
   }
 
 
+  /* two full sentences now, so the display size backs off and the measure
+     is capped — the old 4.6rem was tuned for a four-word headline */
   &__title {
-    font-size: clamp(2.4rem, 6.2vw, 4.6rem);
+    font-size: clamp(2rem, 4.4vw, 3.4rem);
+    line-height: 1.12;
+    max-width: 24ch;
     margin-bottom: 24px;
     animation: hero-in 0.8s ease both;
   }
@@ -47,7 +51,7 @@
   &__sub {
     font-size: clamp(1.02rem, 1.4vw, 1.2rem);
     color: var(--muted);
-    max-width: 560px;
+    max-width: 620px;
     margin-bottom: 34px;
     animation: hero-in 0.8s 0.12s ease both;
   }
@@ -57,6 +61,20 @@
     flex-wrap: wrap;
     gap: 12px;
     animation: hero-in 0.8s 0.24s ease both;
+  }
+
+  &__cta {
+    gap: 8px;
+  }
+
+  /* the arrow leads the eye out of the button on hover */
+  &__cta-arrow {
+    flex-shrink: 0;
+    transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  &__cta:hover &__cta-arrow {
+    transform: translateX(4px);
   }
 
   /* ---- stats ---- */

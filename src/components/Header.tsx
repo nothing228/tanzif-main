@@ -19,8 +19,9 @@ const LANGS: { key: LocaleKey; label: string }[] = [
   { key: "ru", label: "Ру" },
 ];
 
-/** below this width the nav collapses into the staggered menu */
-const MOBILE_QUERY = "(max-width: 1160px)";
+/** below this width the nav collapses into the staggered menu — eight links
+    need more room than the six this used to carry */
+const MOBILE_QUERY = "(max-width: 1300px)";
 
 export function Header() {
   const { t, lang, setLang } = useLang();
@@ -39,11 +40,15 @@ export function Header() {
 
   const links = useMemo(
     () => [
-      { id: "calc", label: t.nav.calc },
+      { id: "services", label: t.nav.services },
+      /* "Buyurtma" points at the pickup flow — that's where an order is actually
+         placed; the calculator section below is the price list itself. */
+      { id: "pickup", label: t.nav.calc },
       { id: "tracking", label: t.nav.process },
-      { id: "concierge", label: t.nav.ai },
+      { id: "calc", label: t.nav.prices },
       { id: "business", label: t.nav.business },
       { id: "club", label: t.nav.club },
+      { id: "concierge", label: t.nav.ai },
       { id: "knowledge", label: t.nav.knowledge },
     ],
     [t],
@@ -68,10 +73,14 @@ export function Header() {
     : "";
 
   return (
-    <header className={`header ${scrolled ? "header--scrolled" : ""}`}>
+    <header
+      className={`header ${scrolled ? "header--scrolled" : ""} ${
+        onHome && !scrolled ? "header--hero" : ""
+      }`}
+    >
       <div className="container header__inner">
         <Link to="/" className="header__brand" aria-label="TANZIF">
-          <Logo size={34} />
+          <Logo size={34} className="header__mark" />
           <LogoWord size={19} className="header__name" />
         </Link>
 

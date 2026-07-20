@@ -15,7 +15,7 @@ const LANGS: { key: LocaleKey; label: string }[] = [
   { key: "ru", label: "Ру" },
 ];
 
-type Mode = "login" | "register";
+type Mode = "login" | "register" | "reset";
 
 /** Password input with a show/hide eye toggle. */
 function PasswordField({
@@ -96,7 +96,7 @@ function PhoneField({
 }
 
 export function AuthPage() {
-  const { user, login, register } = useAuth();
+  const { user, login, register, resetPassword } = useAuth();
   const { t, lang, setLang } = useLang();
   const { theme, toggle } = useTheme();
   const navigate = useNavigate();
@@ -108,6 +108,7 @@ export function AuthPage() {
   const [pass, setPass] = useState("");
   const [pass2, setPass2] = useState("");
   const [error, setError] = useState("");
+  const [notice, setNotice] = useState("");
   const [busy, setBusy] = useState(false);
 
   if (user) {
@@ -118,11 +119,16 @@ export function AuthPage() {
   const switchMode = (m: Mode) => {
     setMode(m);
     setError("");
+    setNotice("");
+    /* passwords never carry across modes — the phone does, it saves retyping */
+    setPass("");
+    setPass2("");
   };
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setError("");
+    setNotice("");
 
     if (mode === "register" && name.trim().length < 2) {
       setError(t.auth.errName);
@@ -136,13 +142,26 @@ export function AuthPage() {
       setError(t.auth.errPass);
       return;
     }
-    if (mode === "register" && pass !== pass2) {
+    if (mode !== "login" && pass !== pass2) {
       setError(t.auth.errPass2);
       return;
     }
 
     setBusy(true);
     try {
+      if (mode === "reset") {
+        const ok = await resetPassword(phone, pass);
+        if (!ok) {
+          setError(t.auth.errNoAccount);
+          return;
+        }
+        /* back to the login form with the number kept and a confirmation */
+        setMode("login");
+        setPass("");
+        setPass2("");
+        setNotice(t.auth.resetDone);
+        return;
+      }
       if (mode === "register") {
         const res = await register(name.trim(), phone, pass);
         if (!res.ok) {
@@ -162,22 +181,25 @@ export function AuthPage() {
     }
   };
 
+  const submitLabel =
+    mode === "login" ? t.auth.submitLogin : mode === "register" ? t.auth.submitRegister : t.auth.submitReset;
+
   return (
     <div className="auth">
       {/* brand panel */}
       <aside className="auth__brand">
         <div className="auth__brand-top">
-          <LogoLockup size={190} />
+          <LogoLockup size={140} />
         </div>
         <div>
           <h1>{t.auth.brandTitle}</h1>
           <p>{t.auth.brandSub}</p>
         </div>
         <div className="auth__care" aria-hidden>
-          <CareWash size={18} />
-          <CareHand size={18} />
-          <CareIron size={18} />
-          <CareDry size={18} />
+          <CareWash size={30} />
+          <CareHand size={30} />
+          <CareIron size={30} />
+          <CareDry size={30} />
         </div>
       </aside>
 
@@ -201,26 +223,33 @@ export function AuthPage() {
         </div>
 
         <form className="auth__card" onSubmit={onSubmit}>
-          <div className="auth__tabs" role="tablist">
-            <button
-              type="button"
-              role="tab"
-              aria-selected={mode === "login"}
-              className={mode === "login" ? "is-active" : ""}
-              onClick={() => switchMode("login")}
-            >
-              {t.auth.loginTab}
-            </button>
-            <button
-              type="button"
-              role="tab"
-              aria-selected={mode === "register"}
-              className={mode === "register" ? "is-active" : ""}
-              onClick={() => switchMode("register")}
-            >
-              {t.auth.registerTab}
-            </button>
-          </div>
+          {mode === "reset" ? (
+            <header className="auth__reset-head">
+              <h2>{t.auth.resetTitle}</h2>
+              <p>{t.auth.resetLead}</p>
+            </header>
+          ) : (
+            <div className="auth__tabs" role="tablist">
+              <button
+                type="button"
+                role="tab"
+                aria-selected={mode === "login"}
+                className={mode === "login" ? "is-active" : ""}
+                onClick={() => switchMode("login")}
+              >
+                {t.auth.loginTab}
+              </button>
+              <button
+                type="button"
+                role="tab"
+                aria-selected={mode === "register"}
+                className={mode === "register" ? "is-active" : ""}
+                onClick={() => switchMode("register")}
+              >
+                {t.auth.registerTab}
+              </button>
+            </div>
+          )}
 
           {mode === "register" && (
             <label className="auth__field">
@@ -238,18 +267,18 @@ export function AuthPage() {
           <PhoneField value={phone} onChange={setPhone} label={t.auth.phone} />
 
           <PasswordField
-            label={t.auth.password}
+            label={mode === "reset" ? t.auth.newPassword : t.auth.password}
             value={pass}
             onChange={setPass}
             placeholder={t.auth.passwordPh}
-            autoComplete={mode === "register" ? "new-password" : "current-password"}
+            autoComplete={mode === "login" ? "current-password" : "new-password"}
             showLabel={t.auth.showPass}
             hideLabel={t.auth.hidePass}
           />
 
-          {mode === "register" && (
+          {mode !== "login" && (
             <PasswordField
-              label={t.auth.password2}
+              label={mode === "reset" ? t.auth.newPassword2 : t.auth.password2}
               value={pass2}
               onChange={setPass2}
               autoComplete="new-password"
@@ -258,25 +287,37 @@ export function AuthPage() {
             />
           )}
 
+          {mode === "login" && (
+            <button type="button" className="auth__forgot" onClick={() => switchMode("reset")}>
+              {t.auth.forgot}
+            </button>
+          )}
+
           {error && (
             <p className="auth__error" role="alert">
               {error}
             </p>
           )}
 
+          {notice && (
+            <p className="auth__notice" role="status">
+              {notice}
+            </p>
+          )}
+
           <button type="submit" className="btn btn--primary auth__submit" disabled={busy}>
-            {mode === "login" ? t.auth.submitLogin : t.auth.submitRegister}
+            {submitLabel}
           </button>
 
           <button
             type="button"
             className="auth__switch"
-            onClick={() => switchMode(mode === "login" ? "register" : "login")}
+            onClick={() => switchMode(mode === "register" ? "login" : mode === "reset" ? "login" : "register")}
           >
-            {mode === "login" ? t.auth.switchToRegister : t.auth.switchToLogin}
+            {mode === "login" ? t.auth.switchToRegister : mode === "register" ? t.auth.switchToLogin : t.auth.backToLogin}
           </button>
 
-          <p className="auth__note">{t.auth.uzOnly}</p>
+          <p className="auth__note">{mode === "reset" ? t.auth.resetDemoNote : t.auth.uzOnly}</p>
           <p className="auth__note auth__note--demo mono">{t.auth.demoNote}</p>
         </form>
       </main>

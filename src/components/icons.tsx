@@ -178,6 +178,13 @@ export const IconSearch = ({ size = 18, className }: IconProps) => (
   </svg>
 );
 
+export const IconArrowRight = ({ size = 18, className }: IconProps) => (
+  <svg {...base(size)} className={className}>
+    <path d="M4 12h15" />
+    <path d="M13 6l6 6-6 6" />
+  </svg>
+);
+
 export const IconSend = ({ size = 18, className }: IconProps) => (
   <svg {...base(size)} className={className}>
     <path d="M22 2L11 13" />

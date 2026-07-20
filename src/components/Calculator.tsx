@@ -4,6 +4,7 @@ import { useReveal } from "../hooks/useReveal";
 import { useAuthGate } from "./AuthGate";
 import { AnimatedList } from "./AnimatedList";
 import { PRICELIST } from "../data/pricelist";
+import { DEPARTMENTS, deptLabel, groupName, itemName, unitName } from "../data/priceLocale";
 import { iconFor } from "../data/itemIcons";
 import { SectionTag } from "./SectionTag";
 import { CareWash, IconCheck, IconSearch } from "./icons";
@@ -15,39 +16,47 @@ const ALL = "__all__";
 
 interface Row {
   code: string;
+  /** Russian — what iconFor matches on */
   name: string;
+  /** what the customer reads, in the active language */
+  label: string;
   unit: string;
   price: number;
+  /** Russian subgroup — the stable key */
   group: string;
+  groupLabel: string;
+  dept: string;
 }
 
 const fmt = (n: number) => n.toLocaleString("ru-RU").replace(/,/g, " ");
 
-/** flat rows, each tagged with its subgroup */
-const ROWS: Row[] = PRICELIST.flatMap((g) =>
-  g.items.map((i) => ({ ...i, group: g.group })),
-);
-
-const DEPARTMENTS = Array.from(new Set(PRICELIST.map((g) => g.top)));
-
-const ROWS_BY_DEPT = new Map<string, Row[]>(
-  DEPARTMENTS.map((dept) => [
-    dept,
-    PRICELIST.filter((g) => g.top === dept).flatMap((g) =>
-      g.items.map((i) => ({ ...i, group: g.group })),
-    ),
-  ]),
-);
-
 export function Calculator() {
-  const { t } = useLang();
+  const { t, lang } = useLang();
   const ref = useReveal<HTMLDivElement>();
   const { guard, gate } = useAuthGate();
 
   const [counts, setCounts] = useState<Record<string, number>>({});
   const [query, setQuery] = useState("");
-  const [dept, setDept] = useState<string>(DEPARTMENTS[0]);
+  const [dept, setDept] = useState<string>(DEPARTMENTS[0].key);
   const [sent, setSent] = useState(false);
+
+  /* rebuilt on language change — the labels are localised, the keys are not */
+  const rows = useMemo<Row[]>(
+    () =>
+      PRICELIST.flatMap((g) =>
+        g.items.map((i) => ({
+          code: i.code,
+          name: i.name,
+          label: itemName(i, lang),
+          unit: unitName(i.unit, lang),
+          price: i.price,
+          group: g.group,
+          groupLabel: groupName(g, lang),
+          dept: g.top,
+        })),
+      ),
+    [lang],
+  );
 
   const change = (code: string, delta: number) =>
     setCounts((c) => {
@@ -61,14 +70,21 @@ export function Calculator() {
   const visible = useMemo(() => {
     const q = query.trim().toLowerCase();
     if (q) {
-      return ROWS.filter(
-        (r) => r.name.toLowerCase().includes(q) || r.code.includes(q) || r.group.toLowerCase().includes(q),
+      /* the Russian name is searched alongside the localised one, so a term
+         typed in either language still finds the item */
+      return rows.filter(
+        (r) =>
+          r.label.toLowerCase().includes(q) ||
+          r.name.toLowerCase().includes(q) ||
+          r.code.includes(q) ||
+          r.groupLabel.toLowerCase().includes(q) ||
+          r.group.toLowerCase().includes(q),
       );
     }
-    return dept === ALL ? ROWS : (ROWS_BY_DEPT.get(dept) ?? []);
-  }, [query, dept]);
+    return dept === ALL ? rows : rows.filter((r) => r.dept === dept);
+  }, [query, dept, rows]);
 
-  const rowByCode = useMemo(() => new Map(ROWS.map((r) => [r.code, r])), []);
+  const rowByCode = useMemo(() => new Map(rows.map((r) => [r.code, r])), [rows]);
 
   const { total, picked } = useMemo(() => {
     let total = 0;
@@ -78,7 +94,7 @@ export function Calculator() {
       if (!row) continue;
       const sum = row.price * count;
       total += sum;
-      picked.push({ code, name: row.name, count, sum, quote: row.price === 0 });
+      picked.push({ code, name: row.label, count, sum, quote: row.price === 0 });
     }
     return { total, picked };
   }, [counts, rowByCode]);
@@ -95,9 +111,9 @@ export function Calculator() {
           <Icon size={24} />
         </span>
         <div className="price-row__main">
-          <span className="price-row__name">{row.name}</span>
+          <span className="price-row__name">{row.label}</span>
           <span className="price-row__group mono">
-            {row.code} · {row.group}
+            {row.code} · {row.groupLabel}
           </span>
         </div>
         <span className="price-row__price mono">
@@ -107,11 +123,11 @@ export function Calculator() {
           className="price-row__stepper"
           onClick={(e) => e.stopPropagation()} /* keep row-select out of the stepper */
         >
-          <button onClick={() => change(row.code, -1)} aria-label={`− ${row.name}`} disabled={n === 0}>
+          <button onClick={() => change(row.code, -1)} aria-label={`− ${row.label}`} disabled={n === 0}>
             −
           </button>
           <span className="mono">{n}</span>
-          <button onClick={() => change(row.code, 1)} aria-label={`+ ${row.name}`}>
+          <button onClick={() => change(row.code, 1)} aria-label={`+ ${row.label}`}>
             +
           </button>
         </div>
@@ -144,13 +160,13 @@ export function Calculator() {
               <div className="calc__depts" role="tablist">
                 {DEPARTMENTS.map((d) => (
                   <button
-                    key={d}
+                    key={d.key}
                     role="tab"
-                    aria-selected={dept === d}
-                    className={`calc__dept ${dept === d ? "is-active" : ""}`}
-                    onClick={() => setDept(d)}
+                    aria-selected={dept === d.key}
+                    className={`calc__dept ${dept === d.key ? "is-active" : ""}`}
+                    onClick={() => setDept(d.key)}
                   >
-                    {d.replace(/^ОТДЕЛ\s+/i, "")}
+                    {deptLabel(d, lang)}
                   </button>
                 ))}
                 <button

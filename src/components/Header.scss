@@ -19,26 +19,53 @@
     height: 72px;
   }
 
+  /* On the hero the logo is drawn larger so it carries the first screen, then
+     settles into the compact header on scroll. Only the rendered size changes —
+     the artwork itself is untouched. Sizing via height (not transform) keeps the
+     nav laid out around the logo instead of letting it overlap. */
   &__brand {
     display: flex;
     align-items: center;
     gap: 10px;
     flex-shrink: 0;
+    transition: gap 0.3s ease;
+
+    .header--hero & {
+      gap: 14px;
+    }
+  }
+
+  &__mark {
+    flex-shrink: 0;
+    height: 34px;
+    width: auto;
+    transition: height 0.3s ease;
+
+    .header--hero & {
+      height: 52px;
+    }
   }
 
   &__name {
     display: block;
     flex-shrink: 0;
+    height: 19px;
+    width: auto;
+    transition: height 0.3s ease;
+
+    .header--hero & {
+      height: 29px;
+    }
   }
 
   &__nav {
     display: flex;
     align-items: center;
-    gap: clamp(14px, 1.8vw, 26px);
+    gap: clamp(11px, 1.25vw, 20px);
     min-width: 0;
 
     a {
-      font-size: 0.88rem;
+      font-size: 0.86rem;
       font-weight: 500;
       white-space: nowrap;
       color: var(--muted);

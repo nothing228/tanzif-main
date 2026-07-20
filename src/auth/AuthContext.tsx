@@ -23,6 +23,8 @@ interface AuthValue {
   user: User | null;
   register: (name: string, phone: string, password: string) => Promise<{ ok: boolean; error?: RegisterError }>;
   login: (phone: string, password: string) => Promise<boolean>;
+  /** Demo recovery: no SMS step, so the caller must surface that to the user. */
+  resetPassword: (phone: string, password: string) => Promise<boolean>;
   logout: () => void;
 }
 
@@ -100,12 +102,28 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return true;
   }, []);
 
+  /**
+   * Rewrites the stored hash for an existing number. A real backend would gate
+   * this behind an SMS code — that step slots in here without touching the UI.
+   */
+  const resetPassword = useCallback(async (phone: string, password: string) => {
+    const users = loadUsers();
+    const stored = users[phone];
+    if (!stored) return false;
+    users[phone] = { ...stored, hash: await hashPassword(phone, password) };
+    saveUsers(users);
+    return true;
+  }, []);
+
   const logout = useCallback(() => {
     localStorage.removeItem(SESSION_KEY);
     setUser(null);
   }, []);
 
-  const value = useMemo(() => ({ user, register, login, logout }), [user, register, login, logout]);
+  const value = useMemo(
+    () => ({ user, register, login, resetPassword, logout }),
+    [user, register, login, resetPassword, logout],
+  );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

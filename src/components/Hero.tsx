@@ -1,6 +1,6 @@
 import { useLang } from "../i18n/LangContext";
 import { AnchorLink } from "./AnchorLink";
-import { IconStar } from "./icons";
+import { IconArrowRight, IconStar } from "./icons";
 import "./Hero.scss";
 
 export function Hero() {
@@ -22,8 +22,17 @@ export function Hero() {
           <h1 className="hero__title">{t.hero.title}</h1>
           <p className="hero__sub">{t.hero.sub}</p>
           <div className="hero__ctas">
-            <AnchorLink id="calc" className="btn btn--primary">
+            <AnchorLink id="calc" className="btn btn--primary hero__cta">
               {t.hero.ctaOrder}
+              <IconArrowRight size={18} className="hero__cta-arrow" />
+            </AnchorLink>
+            <AnchorLink id="calc" className="btn btn--ghost hero__cta">
+              {t.hero.ctaPrice}
+              <IconArrowRight size={18} className="hero__cta-arrow" />
+            </AnchorLink>
+            <AnchorLink id="pickup" className="btn btn--ghost hero__cta">
+              {t.hero.ctaCourier}
+              <IconArrowRight size={18} className="hero__cta-arrow" />
             </AnchorLink>
           </div>
         </div>
