@@ -1,21 +1,17 @@
 import { useLang } from "../i18n/LangContext";
 import { AnchorLink } from "./AnchorLink";
-import { IconArrowRight, IconStar } from "./icons";
+import { IconArrowRight } from "./icons";
+import { Partners } from "./Partners";
 import "./Hero.scss";
 
 export function Hero() {
   const { t } = useLang();
 
-  const stats = [
-    { value: t.hero.statOrdersValue, label: t.hero.statOrders, stars: false },
-    { value: "", label: t.hero.statRating, stars: true },
-    { value: t.hero.statReturnValue, label: t.hero.statReturn, stars: false },
-    { value: t.hero.statExpValue, label: t.hero.statExp, stars: false },
-  ];
-
   return (
     <section className="hero" id="top">
-      <div className="hero__pattern" aria-hidden />
+      {/* photo backdrop + readability scrim; the copy sits on top of both */}
+      <div className="hero__bg" aria-hidden />
+      <div className="hero__scrim" aria-hidden />
 
       <div className="container hero__inner">
         <div className="hero__copy">
@@ -39,24 +35,7 @@ export function Hero() {
       </div>
 
       <div className="container hero__foot">
-        <dl className="hero__stats">
-          {stats.map((s) => (
-            <div key={s.label} className="hero__stat">
-              <dt className="hero__stat-value mono">
-                {s.stars ? (
-                  <span className="hero__stars">
-                    {Array.from({ length: 5 }).map((_, i) => (
-                      <IconStar key={i} size={20} />
-                    ))}
-                  </span>
-                ) : (
-                  s.value
-                )}
-              </dt>
-              <dd className="hero__stat-label">{s.label}</dd>
-            </div>
-          ))}
-        </dl>
+        <Partners />
       </div>
     </section>
   );

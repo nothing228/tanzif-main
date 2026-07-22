@@ -105,20 +105,87 @@
     }
   }
 
+  /* per-step duration, dimmer than the label */
+  &__time {
+    font-size: 0.68rem;
+    color: var(--muted-dark);
+    opacity: 0.7;
+    letter-spacing: 0.02em;
+  }
+
   &__notify {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 14px 20px;
     margin-top: 32px;
     padding-top: 22px;
     border-top: 1.5px dashed var(--deep-3);
     color: var(--muted-dark);
     font-size: 0.9rem;
+  }
+
+  &__notify-title {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
 
     svg {
       color: var(--aqua);
       flex-shrink: 0;
+    }
+  }
+
+  &__channels {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  /* toggleable notification channel */
+  &__channel {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 14px 7px 10px;
+    border-radius: 999px;
+    border: 1.5px solid var(--deep-3);
+    background: transparent;
+    color: var(--muted-dark);
+    font-size: 0.84rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+
+    &:hover {
+      border-color: var(--aqua);
+      color: var(--on-deep);
+    }
+
+    &.is-on {
+      border-color: var(--aqua);
+      color: var(--deep);
+      background: var(--aqua);
+    }
+  }
+
+  /* the square check-box inside each channel pill */
+  &__check {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 5px;
+    border: 1.5px solid var(--muted-dark);
+    color: var(--deep);
+    transition: background 0.2s ease, border-color 0.2s ease;
+
+    .is-on & {
+      background: var(--deep);
+      border-color: var(--deep);
+      color: var(--aqua);
     }
   }
 }

@@ -11,4 +11,7 @@ export const CONTACTS = {
   instagram: "https://www.instagram.com/tanzif_cleaning",
   phone: "+998935705150",
   phone2: "+998935705992",
+  email: "info@tanzif.uz",
+  /** opens the pickup address in Google Maps */
+  maps: "https://www.google.com/maps/search/?api=1&query=Toshkent+Maxtumquli+koʻchasi+136",
 } as const;

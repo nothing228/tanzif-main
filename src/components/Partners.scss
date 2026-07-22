@@ -1,0 +1,130 @@
+.partners {
+  border-top: 1px solid var(--line);
+  padding-top: 22px;
+
+  &__label {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    /* --ink, not --muted: this strip sits on the hero photo, where the muted
+       grey measured 2.6:1 against the backdrop and failed everywhere */
+    color: var(--ink);
+    margin-bottom: 14px;
+  }
+
+  &__viewport {
+    overflow: hidden;
+    mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+  }
+
+  &__track {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    width: max-content;
+    gap: 0;
+    animation: partners-marquee 40s linear infinite;
+    will-change: transform;
+
+    &:hover,
+    &:active {
+      animation-play-state: paused;
+    }
+  }
+
+  &__set {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 10px;
+    /* trailing gap so the seam between copies matches item spacing */
+    padding-right: 10px;
+  }
+
+  /* Each logo carries its own background — a blue square, a navy square, a
+     black circle, a couple of photographs. The tile normalises that so the row
+     reads as one strip instead of twelve mismatched cut-outs. */
+  &__item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    height: 62px;
+    padding: 8px 13px;
+    border-radius: 12px;
+    background: var(--white);
+    border: 1px solid var(--line);
+    transition: border-color 0.25s ease, transform 0.25s ease;
+
+    img {
+      display: block;
+      max-height: 100%;
+      width: auto;
+      max-width: 118px;
+      object-fit: contain;
+      /* muted at rest so a dozen palettes don't shout over the hero copy */
+      filter: grayscale(1);
+      opacity: 0.6;
+      transition: filter 0.25s ease, opacity 0.25s ease;
+    }
+
+    &:hover {
+      border-color: var(--aqua-deep);
+      transform: translateY(-2px);
+
+      img {
+        filter: none;
+        opacity: 1;
+      }
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .partners {
+    &__viewport {
+      margin-inline: -24px;
+    }
+
+    &__track {
+      animation-duration: 36s;
+    }
+
+    &__item {
+      height: 48px;
+    }
+  }
+}
+
+@keyframes partners-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .partners {
+    &__viewport {
+      overflow-x: auto;
+      scrollbar-width: none;
+      mask-image: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    &__track {
+      animation: none !important;
+    }
+
+    &__set[aria-hidden="true"] {
+      display: none;
+    }
+  }
+}

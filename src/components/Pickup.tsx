@@ -130,7 +130,10 @@ export function Pickup() {
           {/* form */}
           <div className="pickup__form">
             <label className="pickup__address-field">
-              <span className="pickup__field-label">{t.pickup.addressLabel}</span>
+              <span className="pickup__field-label pickup__field-label--icon">
+                <IconPin size={13} />
+                {t.pickup.addressLabel}
+              </span>
               <input
                 type="text"
                 placeholder={t.pickup.addressPh}

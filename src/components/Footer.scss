@@ -65,16 +65,70 @@
     }
   }
 
-  &__agbis {
-    margin-top: 8px;
-    font-size: 0.74rem !important;
-    color: var(--muted-dark) !important;
+  /* icon + handle rows (email, telegram, instagram, address) */
+  &__social {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    svg {
+      flex-shrink: 0;
+      color: var(--aqua);
+    }
+  }
+
+  &__role {
+    color: var(--muted-dark);
+    font-size: 0.82rem;
+  }
+
+  &__map-hint {
+    font-size: 0.78rem;
+    color: var(--muted-dark);
+  }
+
+  /* second heading inside the address column */
+  &__col-gap {
+    margin-top: 18px;
   }
 
   &__bottom {
     padding-top: 24px;
     font-size: 0.8rem;
     color: var(--muted-dark);
+  }
+
+  /* floating scroll-to-top — appears once the page is scrolled */
+  &__totop {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 120;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--deep);
+    color: var(--on-deep);
+    border: 1.5px solid var(--aqua);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    opacity: 0;
+    transform: translateY(12px);
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease, background 0.15s ease;
+
+    &.is-visible {
+      opacity: 1;
+      transform: none;
+      pointer-events: auto;
+    }
+
+    &:hover {
+      background: var(--aqua);
+      color: var(--deep);
+    }
   }
 }
 

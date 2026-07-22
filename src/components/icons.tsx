@@ -178,6 +178,44 @@ export const IconSearch = ({ size = 18, className }: IconProps) => (
   </svg>
 );
 
+/* recognizable brand glyphs — filled, so they read at footer size */
+export const IconTelegram = ({ size = 20, className }: IconProps) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden>
+    <path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z" />
+  </svg>
+);
+
+export const IconInstagram = ({ size = 20, className }: IconProps) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.9"
+    className={className}
+    aria-hidden
+  >
+    <rect x="2.5" y="2.5" width="19" height="19" rx="5.5" />
+    <circle cx="12" cy="12" r="4.2" />
+    <circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none" />
+  </svg>
+);
+
+export const IconMail = ({ size = 20, className }: IconProps) => (
+  <svg {...base(size)} className={className}>
+    <rect x="3" y="5" width="18" height="14" rx="2.5" />
+    <path d="M4 7l8 5.5L20 7" />
+  </svg>
+);
+
+export const IconArrowUp = ({ size = 18, className }: IconProps) => (
+  <svg {...base(size)} className={className}>
+    <path d="M12 19V6" />
+    <path d="M6 11l6-6 6 6" />
+  </svg>
+);
+
 export const IconArrowRight = ({ size = 18, className }: IconProps) => (
   <svg {...base(size)} className={className}>
     <path d="M4 12h15" />

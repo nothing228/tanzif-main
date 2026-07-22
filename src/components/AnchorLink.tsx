@@ -9,12 +9,10 @@ export const SECTIONS = {
   pickup: "pickup",
   tracking: "tracking",
   gallery: "gallery",
-  live: "live",
   concierge: "concierge",
   personal: "personal",
   business: "business",
   club: "club",
-  eco: "eco",
   knowledge: "knowledge",
 } as const;
 

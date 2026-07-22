@@ -10,11 +10,9 @@ import { Hero } from "../components/Hero";
 import { Services } from "../components/Services";
 import { HowItWorks } from "../components/HowItWorks";
 import { Trust } from "../components/Trust";
-import { Eco } from "../components/Eco";
 import { Calculator } from "../components/Calculator";
 import { Pickup } from "../components/Pickup";
 import { Tracking } from "../components/Tracking";
-import { Live } from "../components/Live";
 import { Gallery } from "../components/Gallery";
 import { Concierge } from "../components/Concierge";
 import { Personal } from "../components/Personal";
@@ -27,7 +25,6 @@ import {
   IconBag,
   IconCamera,
   IconCoat,
-  IconLeaf,
   IconShield,
   IconStar,
   Sparkle,
@@ -131,13 +128,6 @@ export function HomePage() {
       <StickyFlow
         blocks={[
           {
-            id: "live",
-            tag: <SectionTag num="06" label={t.module} icon={<IconCamera size={18} />} />,
-            title: t.live.title,
-            lead: t.live.lead,
-            content: <Live />,
-          },
-          {
             id: "concierge",
             tag: <SectionTag num="07" label={t.module} icon={<CareDryClean size={18} />} />,
             title: t.concierge.title,
@@ -157,13 +147,6 @@ export function HomePage() {
             content: <Business />,
           },
           { id: "club", title: t.club.title, lead: t.club.lead, content: <Club /> },
-          {
-            id: "eco",
-            tag: <SectionTag num="15" label={t.module} icon={<IconLeaf size={17} />} />,
-            title: t.eco.title,
-            lead: t.eco.lead,
-            content: <Eco />,
-          },
           {
             id: "knowledge",
             tag: <SectionTag num="16" label={t.module} icon={<CareHand size={18} />} />,

@@ -11,9 +11,10 @@
     flex-direction: column;
   }
 
+  /* Fixed rather than flex:1 — it used to stretch to the form's height (443px),
+     so min-height never governed the size. 20% shorter than that. */
   &__map {
-    flex: 1;
-    min-height: 380px;
+    height: 354px;
     border-radius: var(--radius-lg);
     overflow: hidden;
     border: 1px solid var(--line);
@@ -121,6 +122,17 @@
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--muted);
+
+    &--icon {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+
+      svg {
+        flex-shrink: 0;
+        color: var(--aqua-deep);
+      }
+    }
   }
 
   &__field-value {
@@ -242,12 +254,18 @@
   font-family: var(--font-body);
 }
 
+/* Leaflet 1.9 ships a flag next to its own name in the attribution. The
+   OpenStreetMap credit stays — ODbL requires it — only the flag goes. */
+.leaflet-attribution-flag {
+  display: none !important;
+}
+
 @media (max-width: 900px) {
   .pickup {
     grid-template-columns: 1fr;
 
     &__map {
-      min-height: 300px;
+      height: 240px;
     }
 
     &__fields {

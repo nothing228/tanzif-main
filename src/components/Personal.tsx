@@ -1,7 +1,24 @@
 import { useLang } from "../i18n/LangContext";
 import { useReveal } from "../hooks/useReveal";
-import { CareDry, CareHand, CareWash, IconBell, IconCarpet } from "./icons";
+import { AnchorLink } from "./AnchorLink";
+import {
+  CareDry,
+  CareHand,
+  IconArrowRight,
+  IconBag,
+  IconBell,
+  IconCarpet,
+  IconCoat,
+  IconSuit,
+} from "./icons";
 import "./Personal.scss";
+
+/** one icon per wardrobe item — a hanger-style garment cue, not the order basket */
+const WARDROBE_ICONS = [IconSuit, IconBag, IconCoat];
+
+/** "2025 · 2026 · 2026" → "2025 · 2026"; guards against a repeated year slipping in */
+const uniqueYears = (years: string) =>
+  [...new Set(years.split("·").map((y) => y.trim()))].join(" · ");
 
 export function Personal() {
   const { t } = useLang();
@@ -80,18 +97,25 @@ export function Personal() {
                 <p>{w.desc}</p>
               </header>
               <ul className="personal__wardrobe">
-                {w.items.map((item) => (
-                  <li key={item.name}>
-                    <span className="personal__w-icon">
-                      <CareWash size={17} />
-                    </span>
-                    <div>
-                      <strong>{item.name}</strong>
-                      <span>{item.count}</span>
-                    </div>
-                    <span className="personal__w-years mono">{item.years}</span>
-                  </li>
-                ))}
+                {w.items.map((item, i) => {
+                  const Icon = WARDROBE_ICONS[i] ?? IconSuit;
+                  return (
+                    <li key={item.name}>
+                      <span className="personal__w-icon">
+                        <Icon size={18} />
+                      </span>
+                      <div className="personal__w-main">
+                        <strong>{item.name}</strong>
+                        <span>{item.count}</span>
+                      </div>
+                      <span className="personal__w-years mono">{uniqueYears(item.years)}</span>
+                      <AnchorLink id="calc" className="personal__w-reorder">
+                        {w.reorder}
+                        <IconArrowRight size={14} />
+                      </AnchorLink>
+                    </li>
+                  );
+                })}
               </ul>
             </article>
 
