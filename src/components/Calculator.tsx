@@ -10,7 +10,8 @@ import { SectionTag } from "./SectionTag";
 import { CareWash, IconCheck, IconSearch } from "./icons";
 import "./Calculator.scss";
 
-const FREE_COURIER_FROM = 100_000;
+const FREE_COURIER_FROM = 300_000;
+const COURIER_FEE = 40_000;
 const READY_DAYS = 3;
 const ALL = "__all__";
 
@@ -224,7 +225,7 @@ export function Calculator() {
                 <div className="calc__receipt-row">
                   <span>{t.calc.courier}</span>
                   <span className={courierFree ? "calc__free" : "mono"}>
-                    {courierFree ? t.calc.free : `20 000 ${t.calc.sum}`}
+                    {courierFree ? t.calc.free : `${fmt(COURIER_FEE)} ${t.calc.sum}`}
                   </span>
                 </div>
                 <div className="calc__receipt-row">

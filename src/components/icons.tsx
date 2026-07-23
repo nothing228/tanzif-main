@@ -209,6 +209,32 @@ export const IconMail = ({ size = 20, className }: IconProps) => (
   </svg>
 );
 
+export const IconGift = ({ size = 20, className }: IconProps) => (
+  <svg {...base(size)} className={className}>
+    <rect x="3" y="9" width="18" height="12" rx="2" />
+    <path d="M3 13h18M12 9v12" />
+    <path d="M12 9S9.5 9 8.4 7.9a2.1 2.1 0 0 1 3-3C12.4 6 12 9 12 9z" />
+    <path d="M12 9s2.5 0 3.6-1.1a2.1 2.1 0 0 0-3-3C11.6 6 12 9 12 9z" />
+  </svg>
+);
+
+export const IconUsers = ({ size = 20, className }: IconProps) => (
+  <svg {...base(size)} className={className}>
+    <circle cx="9" cy="8" r="3.2" />
+    <path d="M3 20c0-3.3 2.7-5.4 6-5.4s6 2.1 6 5.4" />
+    <path d="M16 5.3a3.2 3.2 0 0 1 0 6.1" />
+    <path d="M18 14.9c2 .8 3 2.6 3 5.1" />
+  </svg>
+);
+
+/** price tag with a spark — the "special offers" perk */
+export const IconSparkTag = ({ size = 20, className }: IconProps) => (
+  <svg {...base(size)} className={className}>
+    <path d="M20.5 12.8l-7.7 7.7a2 2 0 0 1-2.8 0l-6.5-6.5a2 2 0 0 1-.6-1.6l.5-5.6a2 2 0 0 1 1.8-1.8l5.6-.5a2 2 0 0 1 1.6.6l6.5 6.5a2 2 0 0 1 0 2.8z" />
+    <circle cx="8.6" cy="8.6" r="1.4" />
+  </svg>
+);
+
 export const IconArrowUp = ({ size = 18, className }: IconProps) => (
   <svg {...base(size)} className={className}>
     <path d="M12 19V6" />

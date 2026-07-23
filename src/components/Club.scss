@@ -14,19 +14,98 @@
   }
 
   /* ---- loyalty ---- */
+  /* ---- points estimator ---- */
+  &__calc {
+    margin: 18px 0 26px;
+    padding: 20px;
+    border-radius: var(--radius-lg);
+    background: var(--deep);
+    color: var(--on-deep);
+  }
+
+  &__calc-label {
+    display: block;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted-dark);
+  }
+
+  &__calc-spend {
+    display: block;
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--aqua);
+    margin: 6px 0 12px;
+  }
+
+  &__calc input[type="range"] {
+    width: 100%;
+    accent-color: var(--aqua);
+    cursor: pointer;
+  }
+
+  &__calc-out {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 18px;
+
+    > div {
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--deep-3);
+    }
+
+    strong {
+      display: block;
+      font-size: 1.25rem;
+      font-weight: 600;
+      line-height: 1.15;
+    }
+
+    span {
+      font-size: 0.74rem;
+      color: var(--muted-dark);
+    }
+  }
+
+  /* the yearly figure is the persuasive one, so it carries the gold */
+  &__calc-year strong {
+    color: var(--aqua);
+  }
+
+  &__calc-hint {
+    margin-top: 12px;
+    font-size: 0.74rem;
+    color: var(--muted-dark);
+  }
+
+  /* ---- perk cards ---- */
   &__perks {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
 
     li {
       display: flex;
       flex-direction: column;
-      gap: 2px;
-      padding: 14px 0;
-      border-bottom: 1px solid var(--line);
+      gap: 4px;
+      padding: 16px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: var(--white);
+      transition: border-color 0.2s ease, transform 0.2s ease;
 
-      &:last-child {
-        border-bottom: none;
+      &:hover {
+        border-color: var(--aqua-deep);
+        transform: translateY(-2px);
+      }
+
+      /* the first card spans the row — it is the headline benefit */
+      &:first-child {
+        grid-column: 1 / -1;
       }
 
       strong {
@@ -38,6 +117,18 @@
         color: var(--muted);
       }
     }
+  }
+
+  &__perk-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background: var(--picked-bg);
+    color: var(--aqua-deep);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 6px;
   }
 
   /* ---- membership tiers ---- */
@@ -127,9 +218,12 @@
   &__tier-name {
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: 0.95rem;
-    letter-spacing: 0.14em;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
+    text-align: right;
+    line-height: 1.2;
+    max-width: 11em;
   }
 
   &__tier-join {
@@ -159,7 +253,12 @@
 }
 
 @media (max-width: 640px) {
-  .club__tiers {
+  .club__tiers,
+  .club__perks {
+    grid-template-columns: 1fr;
+  }
+
+  .club__calc-out {
     grid-template-columns: 1fr;
   }
 }

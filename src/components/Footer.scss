@@ -99,10 +99,11 @@
   }
 
   /* floating scroll-to-top — appears once the page is scrolled */
+  /* stacked above the AI widget's button, which owns the bottom-right corner */
   &__totop {
     position: fixed;
     right: 24px;
-    bottom: 24px;
+    bottom: 96px;
     z-index: 120;
     width: 46px;
     height: 46px;

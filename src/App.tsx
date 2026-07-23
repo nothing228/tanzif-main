@@ -13,6 +13,7 @@ import { ThemeProvider } from "./hooks/ThemeContext";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { MobileCta } from "./components/MobileCta";
+import { AiWidget } from "./components/AiWidget";
 import { AuthPage } from "./pages/AuthPage";
 import { ProfilePage } from "./pages/ProfilePage";
 import { HomePage } from "./pages/pages";
@@ -44,6 +45,7 @@ function Layout() {
       </main>
       <Footer />
       <MobileCta />
+      <AiWidget />
     </>
   );
 }
