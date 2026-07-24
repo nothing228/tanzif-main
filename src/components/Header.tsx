@@ -56,6 +56,9 @@ export function Header() {
   const spyIds = useMemo(() => links.map((l) => l.id), [links]);
   const activeId = useScrollSpy(spyIds);
   const onHome = pathname === "/";
+  const overHero = onHome && !scrolled;
+  /* dark photo behind the bar — light ink is unreadable in light theme */
+  const onDarkBar = theme === "dark" || overHero;
 
   const menuItems = [
     { label: t.nav.home, link: "top" },
@@ -149,8 +152,8 @@ export function Header() {
               displaySocials
               colors={["#ecd6a4", "#d3ab5c"]}
               accentColor={theme === "dark" ? "#e6c67f" : "#9a7b33"}
-              /* the panel uses the page background, so the label keeps the theme's ink colour */
-              menuButtonColor={theme === "dark" ? "#f4ecdc" : "#0b2e33"}
+              /* panel sits on page paper; the toggle sits on the header bar */
+              menuButtonColor={onDarkBar ? "#f4ecdc" : "#0b2e33"}
               openMenuButtonColor={theme === "dark" ? "#f4ecdc" : "#0b2e33"}
             />
           )}

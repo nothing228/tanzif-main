@@ -11,6 +11,61 @@
     box-shadow: 0 1px 0 var(--line);
   }
 
+  /* Hero is always a dark photo plane — light-theme ink/muted would vanish on it.
+     Force light controls until the user scrolls into the frosted bar. */
+  &--hero {
+    .header__nav a {
+      color: rgba(243, 247, 246, 0.82);
+      text-shadow: 0 1px 10px rgba(0, 0, 0, 0.35);
+
+      &:hover {
+        color: #fff;
+      }
+
+      &.active {
+        color: var(--gold-hi);
+      }
+    }
+
+    .header__theme {
+      background: rgba(10, 30, 34, 0.35);
+      border-color: rgba(243, 247, 246, 0.35);
+      color: #f3f7f6;
+      backdrop-filter: blur(10px);
+
+      &:hover {
+        color: var(--gold-hi);
+        border-color: var(--gold-hi);
+      }
+    }
+
+    .header__langs {
+      background: rgba(10, 30, 34, 0.35);
+      border-color: rgba(243, 247, 246, 0.35);
+      backdrop-filter: blur(10px);
+
+      button {
+        color: rgba(243, 247, 246, 0.78);
+
+        &.is-active {
+          background: rgba(255, 255, 255, 0.95);
+          color: #0b2e33;
+        }
+      }
+    }
+
+    .header__login {
+      color: #f3f7f6;
+      border-color: rgba(236, 214, 164, 0.9);
+      text-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+
+      &:hover,
+      &:focus-visible {
+        text-shadow: none;
+      }
+    }
+  }
+
   &__inner {
     display: flex;
     align-items: center;
@@ -68,7 +123,7 @@
       font-size: 0.86rem;
       font-weight: 500;
       white-space: nowrap;
-      color: var(--muted);
+      color: color-mix(in srgb, var(--ink) 72%, var(--muted));
       transition: color 0.15s ease;
 
       &:hover {
