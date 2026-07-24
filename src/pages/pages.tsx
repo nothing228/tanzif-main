@@ -85,11 +85,13 @@ export function HomePage() {
   const { state } = useLocation();
   const { t } = useLang();
 
-  // Arriving from the profile page with a section in mind: jump straight there
-  // — gliding through the whole one-pager would take seconds. The second pass
-  // corrects for layout that settles right after mount (fonts, reveals).
+  // Arriving from another route (or /#section) with a target in mind: jump
+  // straight there — gliding through the whole one-pager would take seconds.
+  // The second pass corrects for layout that settles after mount (fonts, reveals).
   useEffect(() => {
-    const target = (state as { scrollTo?: string } | null)?.scrollTo;
+    const fromState = (state as { scrollTo?: string } | null)?.scrollTo;
+    const fromHash = window.location.hash.replace(/^#/, "");
+    const target = fromState || fromHash;
     if (!target) return;
     const first = window.setTimeout(() => scrollToSection(target, "instant"), 60);
     const settle = window.setTimeout(() => scrollToSection(target, "instant"), 500);

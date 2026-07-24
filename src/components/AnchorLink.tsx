@@ -4,6 +4,7 @@ import type { AnchorHTMLAttributes, ReactNode } from "react";
 /** section ids used by the one-page layout */
 export const SECTIONS = {
   top: "top",
+  services: "services",
   how: "how",
   calc: "calc",
   pickup: "pickup",
@@ -17,7 +18,12 @@ export const SECTIONS = {
 } as const;
 
 export function scrollToSection(id: string, behavior: ScrollBehavior = "smooth") {
-  document.getElementById(id)?.scrollIntoView({ behavior, block: "start" });
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.scrollIntoView({ behavior, block: "start" });
+  if (window.location.hash !== `#${id}`) {
+    history.replaceState(null, "", `#${id}`);
+  }
 }
 
 type AnchorLinkProps = {
@@ -46,7 +52,7 @@ export function AnchorLink({ id, children, className, onClick, ...rest }: Anchor
   };
 
   return (
-    <a href={`#${id}`} className={className} onClick={go} {...rest}>
+    <a href={`/#${id}`} className={className} onClick={go} {...rest}>
       {children}
     </a>
   );
