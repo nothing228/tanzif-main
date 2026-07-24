@@ -25,10 +25,51 @@
   --font-body: "Inter", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
-  --radius: 16px;
-  --radius-lg: 24px;
+  /* ---- radii scale ---- */
+  --r-xs: 8px;
+  --r-sm: 12px;
+  --r-md: 16px;
+  --r-lg: 24px;
+  --r-pill: 999px;
+  /* aliases kept so existing var(--radius*) references stay valid */
+  --radius: var(--r-md);
+  --radius-lg: var(--r-lg);
+
   --container: 1180px;
-  --shadow: 0 10px 34px rgba(11, 46, 51, 0.1);
+
+  /* ---- elevation scale ---- */
+  --shadow-sm: 0 2px 10px rgba(11, 46, 51, 0.06);
+  --shadow-md: 0 10px 34px rgba(11, 46, 51, 0.1);
+  --shadow-lg: 0 24px 60px rgba(11, 46, 51, 0.16);
+  --shadow: var(--shadow-md);
+
+  /* ---- spacing scale ---- */
+  --space-2xs: 6px;
+  --space-xs: 10px;
+  --space-sm: 14px;
+  --space-md: 20px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 72px;
+  --space-section: 96px;
+
+  /* ---- icon badges: one size ramp for every framed icon ---- */
+  --badge-sm: 40px;
+  --badge-md: 48px;
+  --badge-lg: 60px;
+
+  /* ---- motion: one set of speeds and curves for the whole site ---- */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 0.16s;
+  --dur-base: 0.28s;
+  --dur-slow: 0.5s;
+  /* scroll reveals share one duration, curve and travel */
+  --reveal-dur: 0.7s;
+  --reveal-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --reveal-shift: 24px;
+  --reveal-stagger: 90ms;
+  --reveal-blur: 10px;
 
   color-scheme: light;
 }
@@ -47,7 +88,9 @@
   --stitch: rgba(211, 171, 92, 0.3);
   --picked-bg: rgba(211, 171, 92, 0.14);
   --header-bg: rgba(10, 9, 8, 0.88);
-  --shadow: 0 10px 34px rgba(0, 0, 0, 0.6);
+  --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.45);
+  --shadow-md: 0 10px 34px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.72);
 
   /* deep surfaces turn black so dark sections match the page */
   --deep: #050505;
@@ -194,20 +237,45 @@ main > section:first-child {
   border-radius: 999px;
   font-weight: 600;
   font-size: 0.98rem;
-  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  transition: transform var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
 
   &:active {
     transform: scale(0.97);
   }
 
   &--primary {
+    position: relative;
+    overflow: hidden;
     background: linear-gradient(135deg, var(--gold-hi) 0%, var(--aqua) 100%);
     color: var(--deep);
     box-shadow: 0 6px 20px rgba(201, 162, 84, 0.35);
 
+    /* a light sweeps across the gold on hover — the premium tell */
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        105deg,
+        transparent 32%,
+        rgba(255, 255, 255, 0.55) 50%,
+        transparent 68%
+      );
+      transform: translateX(-130%);
+      transition: transform 0.7s var(--ease-out);
+      pointer-events: none;
+    }
+
     &:hover {
       background: linear-gradient(135deg, #f2e0b8 0%, #ddb96b 100%);
-      transform: translateY(-1px);
+      transform: translateY(-2px);
+      box-shadow: 0 14px 32px rgba(201, 162, 84, 0.5);
+    }
+
+    &:hover::before {
+      transform: translateX(130%);
     }
   }
 
@@ -308,15 +376,94 @@ main > section:first-child {
   }
 }
 
+/* ============ icon badge: one framed-icon primitive ============ */
+/* Every "icon in a rounded tile" across the site resolves to this: same three
+   sizes, same radius, same surface. Components add only positioning (margins)
+   on their own class alongside `.icon-badge`. */
+.icon-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: var(--badge-md);
+  height: var(--badge-md);
+  border-radius: var(--r-md);
+  background: var(--picked-bg);
+  border: 1px solid var(--line);
+  color: var(--aqua-deep);
+  transition: color var(--dur-base) var(--ease-out),
+    border-color var(--dur-base) var(--ease-out),
+    background var(--dur-base) var(--ease-out);
+
+  &--sm {
+    width: var(--badge-sm);
+    height: var(--badge-sm);
+    border-radius: var(--r-sm);
+  }
+
+  &--lg {
+    width: var(--badge-lg);
+    height: var(--badge-lg);
+  }
+
+  /* accent chip: gold glyph on a deep surface (notifications, order rows) */
+  &--deep {
+    background: var(--deep);
+    border-color: transparent;
+    color: var(--aqua);
+  }
+}
+
 /* ============ reveal on scroll ============ */
+/* One motion contract for the whole site: same distance, duration and curve
+   everywhere, driven by tokens. `.reveal` moves an element as a single wave;
+   `.reveal-stagger` cascades its direct children so a heading and its content
+   arrive together as one sequence instead of drifting apart. JS adds
+   `.is-visible`; the no-JS / headless fallback below keeps content visible. */
 .reveal {
   opacity: 0;
-  transform: translateY(26px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
+  transform: translateY(var(--reveal-shift)) scale(0.985);
+  filter: blur(var(--reveal-blur));
+  transition: opacity var(--reveal-dur) var(--reveal-ease),
+    transform var(--reveal-dur) var(--reveal-ease), filter var(--reveal-dur) var(--reveal-ease);
 
   &.is-visible {
     opacity: 1;
     transform: none;
+    filter: none;
+  }
+}
+
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(var(--reveal-shift)) scale(0.985);
+  filter: blur(var(--reveal-blur));
+  transition: opacity var(--reveal-dur) var(--reveal-ease),
+    transform var(--reveal-dur) var(--reveal-ease), filter var(--reveal-dur) var(--reveal-ease);
+}
+
+.reveal-stagger.is-visible > * {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+/* fixed depth: direct children of a section wrapper are always few */
+@for $i from 1 through 10 {
+  .reveal-stagger.is-visible > *:nth-child(#{$i}) {
+    transition-delay: calc(#{$i - 1} * var(--reveal-stagger));
+  }
+}
+
+/* No JavaScript ever ran (headless render, disabled JS): show everything so a
+   section never ships blank. `.reveal`/`.reveal-stagger` without `.is-visible`
+   only stays hidden once the observer script has taken over. */
+@media (scripting: none) {
+  .reveal,
+  .reveal-stagger > * {
+    opacity: 1;
+    transform: none;
+    filter: none;
   }
 }
 
@@ -333,9 +480,11 @@ main > section:first-child {
     transition-duration: 0.01ms !important;
   }
 
-  .reveal {
+  .reveal,
+  .reveal-stagger > * {
     opacity: 1;
     transform: none;
+    filter: none;
   }
 }
 

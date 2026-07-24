@@ -65,14 +65,14 @@ export function Tracking() {
 
   return (
     <section className="section section--dark" id="tracking">
-      <div className="container">
+      <div className="container reveal-stagger" ref={ref}>
         <div className="section-head">
           <SectionTag num="04" label={t.module} icon={<CareDry size={18} />} />
           <h2>{t.tracking.title}</h2>
           <p>{t.tracking.lead}</p>
         </div>
 
-        <div className="tracking reveal" ref={ref}>
+        <div className="tracking">
           <div className="tracking__head mono">
             <span>
               {t.tracking.orderNo} № A-350214 · AGBIS

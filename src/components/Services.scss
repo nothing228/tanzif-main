@@ -58,9 +58,9 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 62px;
-    height: 62px;
-    border-radius: 18px;
+    width: var(--badge-lg);
+    height: var(--badge-lg);
+    border-radius: var(--r-md);
     background: var(--picked-bg);
     border: 1px solid var(--line);
     color: var(--aqua-deep);
@@ -180,9 +180,9 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 12px;
+    width: var(--badge-sm);
+    height: var(--badge-sm);
+    border-radius: var(--r-sm);
     border: 1.5px solid var(--aqua-deep);
     color: var(--aqua-deep);
     flex-shrink: 0;
@@ -208,9 +208,8 @@
     }
 
     &__icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 14px;
+      width: var(--badge-md);
+      height: var(--badge-md);
       margin-bottom: 14px;
     }
   }

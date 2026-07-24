@@ -138,14 +138,14 @@ export function Calculator() {
 
   return (
     <section className="section section--white" id="calc">
-      <div className="container">
+      <div className="container reveal-stagger" ref={ref}>
         <div className="section-head">
           <SectionTag num="02" label={t.module} icon={<CareWash size={18} />} />
           <h2>{t.price.title}</h2>
           <p>{t.price.lead}</p>
         </div>
 
-        <div className="calc reveal" ref={ref}>
+        <div className="calc">
           <div className="calc__catalog">
             <div className="calc__search">
               <IconSearch size={18} />

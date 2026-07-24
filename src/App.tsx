@@ -17,6 +17,7 @@ import { AiWidget } from "./components/AiWidget";
 import { AuthPage } from "./pages/AuthPage";
 import { ProfilePage } from "./pages/ProfilePage";
 import { HomePage } from "./pages/pages";
+import { LegalPage } from "./pages/LegalPage";
 
 function ScrollToTop() {
   const { pathname, state } = useLocation();
@@ -64,6 +65,9 @@ export default function App() {
                 <Route element={<RequireAuth />}>
                   <Route path="/profile" element={<ProfilePage />} />
                 </Route>
+                <Route path="/offer" element={<LegalPage />} />
+                <Route path="/privacy" element={<LegalPage />} />
+                <Route path="/terms" element={<LegalPage />} />
                 <Route path="*" element={<Navigate to="/" replace />} />
               </Route>
             </Routes>

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { CONTACTS } from "../data/contacts";
 import { useLang } from "../i18n/LangContext";
 import { AnchorLink } from "./AnchorLink";
@@ -107,6 +108,11 @@ export function Footer() {
 
         <div className="footer__bottom">
           <span>{t.footer.rights}</span>
+          <nav className="footer__legal" aria-label={t.footer.legalTitle}>
+            <Link to="/offer">{t.footer.offer}</Link>
+            <Link to="/privacy">{t.footer.privacy}</Link>
+            <Link to="/terms">{t.footer.terms}</Link>
+          </nav>
         </div>
       </div>
 

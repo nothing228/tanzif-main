@@ -170,9 +170,9 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 36px;
-    height: 36px;
-    border-radius: 10px;
+    width: var(--badge-sm);
+    height: var(--badge-sm);
+    border-radius: var(--r-sm);
     background: var(--deep);
     color: var(--aqua);
     flex-shrink: 0;

@@ -93,9 +93,29 @@
   }
 
   &__bottom {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px 28px;
     padding-top: 24px;
     font-size: 0.8rem;
     color: var(--muted-dark);
+  }
+
+  &__legal {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+
+    a {
+      color: var(--muted-dark);
+      transition: color 0.15s ease;
+
+      &:hover {
+        color: var(--aqua);
+      }
+    }
   }
 
   /* floating scroll-to-top — appears once the page is scrolled */

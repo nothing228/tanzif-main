@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useLang } from "../i18n/LangContext";
+import { useReveal } from "../hooks/useReveal";
 import { Swatch } from "./Swatch";
 import type { SwatchVariant } from "./Swatch";
 import { AnchorLink } from "./AnchorLink";
@@ -28,6 +29,7 @@ export function Services() {
   const { t } = useLang();
   const items = t.services.items;
   const [active, setActive] = useState(0);
+  const headRef = useReveal<HTMLDivElement>();
   const panelsRef = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
@@ -62,7 +64,7 @@ export function Services() {
   return (
     <section className="section services-section" id="services">
       <div className="container">
-        <div className="section-head">
+        <div className="section-head reveal" ref={headRef}>
           <h2>{t.services.title}</h2>
           <p>{t.services.lead}</p>
         </div>
@@ -79,7 +81,7 @@ export function Services() {
                     className={`services__card ${active === i ? "is-active" : ""}`}
                   >
                     <span className="services__icon">
-                      <Icon size={30} />
+                      <Icon size={26} />
                     </span>
                     <h3>{s.name}</h3>
                     <p>{s.desc}</p>
@@ -138,7 +140,7 @@ export function Services() {
                     {s.features.map((f) => (
                       <li key={f.name}>
                         <span className="services__feature-icon">
-                          <IconCheck size={15} />
+                          <IconCheck size={16} />
                         </span>
                         <div>
                           <strong>{f.name}</strong>

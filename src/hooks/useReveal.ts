@@ -7,7 +7,12 @@ export function useReveal<T extends HTMLElement>() {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    // Reveal is a progressive enhancement: if motion is reduced or the observer
+    // is unavailable, show the content immediately rather than leaving it hidden.
+    if (
+      typeof IntersectionObserver === "undefined" ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
       el.classList.add("is-visible");
       return;
     }
@@ -20,9 +25,12 @@ export function useReveal<T extends HTMLElement>() {
           }
         }
       },
-      // small threshold: tall elements (e.g. the price catalog) never reach a
-      // large intersection ratio, so they would stay hidden forever
-      { threshold: 0.01, rootMargin: "0px 0px -40px 0px" },
+      // One trigger point for every section: fire once the element has risen
+      // ~12% of the viewport past the fold, so short and tall blocks alike
+      // animate at the same moment relative to the reader. threshold 0 keeps
+      // very tall blocks (e.g. the price catalog) from waiting for a ratio they
+      // can never reach.
+      { threshold: 0, rootMargin: "0px 0px -12% 0px" },
     );
     io.observe(el);
     return () => io.disconnect();

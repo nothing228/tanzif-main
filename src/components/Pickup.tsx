@@ -109,14 +109,14 @@ export function Pickup() {
 
   return (
     <section className="section" id="pickup">
-      <div className="container">
+      <div className="container reveal-stagger" ref={ref}>
         <div className="section-head">
           <SectionTag num="03" label={t.module} icon={<CareHand size={18} />} />
           <h2>{t.pickup.title}</h2>
           <p>{t.pickup.lead}</p>
         </div>
 
-        <div className="pickup reveal" ref={ref}>
+        <div className="pickup">
           {/* real map */}
           <div className="pickup__map-wrap">
             <div className="pickup__map" ref={mapEl} />

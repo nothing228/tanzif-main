@@ -5,7 +5,7 @@ import { CareWash, IconBag, IconCheck, IconGift, IconSparkTag, IconStar, IconUse
 import { Logo } from "./Logo";
 import "./Club.scss";
 
-const TIER_CLASS = ["gold", "platinum", "black"] as const;
+const TIER_CLASS = ["bronze", "silver", "gold"] as const;
 
 /** one icon per loyalty perk, in the order they appear in the dictionary */
 const PERK_ICONS = [IconStar, IconBag, IconSparkTag, IconGift, IconUsers];

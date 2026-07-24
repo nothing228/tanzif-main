@@ -14,13 +14,11 @@ import { Calculator } from "../components/Calculator";
 import { Pickup } from "../components/Pickup";
 import { Tracking } from "../components/Tracking";
 import { Gallery } from "../components/Gallery";
-import { Concierge } from "../components/Concierge";
 import { Personal } from "../components/Personal";
 import { Business } from "../components/Business";
 import { Club } from "../components/Club";
 import { Knowledge } from "../components/Knowledge";
 import {
-  CareDryClean,
   CareHand,
   IconBag,
   IconCamera,
@@ -127,13 +125,6 @@ export function HomePage() {
       {/* and one sticky column for the rest of the page */}
       <StickyFlow
         blocks={[
-          {
-            id: "concierge",
-            tag: <SectionTag num="07" label={t.module} icon={<CareDryClean size={18} />} />,
-            title: t.concierge.title,
-            lead: t.concierge.lead,
-            content: <Concierge />,
-          },
           {
             id: "personal",
             title: t.personal.title,

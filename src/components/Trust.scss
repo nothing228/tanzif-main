@@ -45,16 +45,8 @@
     }
   }
 
+  /* visual comes from the shared .icon-badge; only spacing is local */
   &__icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 48px;
-    height: 48px;
-    border-radius: 14px;
-    background: var(--picked-bg);
-    border: 1px solid var(--line);
-    color: var(--aqua-deep);
     margin-bottom: 16px;
   }
 

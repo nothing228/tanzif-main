@@ -8,9 +8,8 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.14em;
-    /* --ink, not --muted: this strip sits on the hero photo, where the muted
-       grey measured 2.6:1 against the backdrop and failed everywhere */
-    color: var(--ink);
+    /* the hero is a dark island in both themes, so the label goes light */
+    color: var(--on-deep);
     margin-bottom: 14px;
   }
 

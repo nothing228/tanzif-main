@@ -25,7 +25,7 @@ export function Trust() {
               className={`trust__item${stages ? " trust__item--pipeline" : ""}`}
               spotlightColor="rgba(201, 162, 84, 0.45)"
             >
-              <span className="trust__icon">
+              <span className="icon-badge trust__icon">
                 <Icon size={22} />
               </span>
               <h3>{item.name}</h3>

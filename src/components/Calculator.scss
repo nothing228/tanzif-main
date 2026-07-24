@@ -233,10 +233,10 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 44px;
-    height: 44px;
-    border-radius: 12px;
-    background: var(--white);
+    width: var(--badge-md);
+    height: var(--badge-md);
+    border-radius: var(--r-md);
+    background: var(--picked-bg);
     border: 1px solid var(--line);
     color: var(--ink);
     flex-shrink: 0;

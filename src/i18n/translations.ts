@@ -527,6 +527,116 @@ export const uz = {
     toTop: "Yuqoriga",
     integration: "AGBIS bilan integratsiya",
     rights: "© 2026 TANZIF. Barcha huquqlar himoyalangan.",
+    legalTitle: "Hujjatlar",
+    offer: "Ommaviy oferta",
+    privacy: "Maxfiylik siyosati",
+    terms: "Foydalanish shartlari",
+  },
+  legal: {
+    offer: {
+      title: "Ommaviy oferta",
+      updated: "Yangilangan: 2026-yil 1-yanvar",
+      sections: [
+        {
+          heading: "1. Umumiy qoidalar",
+          paragraphs: [
+            "Ushbu ommaviy oferta («Oferta») TANZIF («Ijrochi») tomonidan jismoniy va yuridik shaxslarga («Buyurtmachi») ximchistka, yuvish, yetkazib berish va bogʻliq onlayn xizmatlarni koʻrsatish shartlarini belgilaydi.",
+            "Sayt yoki mobil kanallar orqali buyurtma berish Ofertaning toʻliq qabul qilinganligini anglatadi.",
+          ],
+        },
+        {
+          heading: "2. Xizmatlar va buyurtma",
+          paragraphs: [
+            "Xizmatlarning roʻyxati, muddatlari va narxlari saytda yoki operator orqali koʻrsatiladi. Yakuniy narx buyumni koʻzdan kechirgandan soʻng aniqlanishi mumkin.",
+            "Buyurtmachi buyum holati, dogʻlar va maxsus talablar haqida toʻgʻri maʼlumot berishga majbur.",
+          ],
+        },
+        {
+          heading: "3. Toʻlov va yetkazib berish",
+          paragraphs: [
+            "Toʻlov naqd, plastik karta yoki onlayn toʻlov tizimlari (Click, Payme, Uzum, Humo, Uzcard va boshqalar) orqali amalga oshiriladi.",
+            "Kuryer orqali olib ketish va yetkazib berish xizmati alohida shartlar va zonalar boʻyicha koʻrsatiladi.",
+          ],
+        },
+        {
+          heading: "4. Javobgarlik",
+          paragraphs: [
+            "Ijrochi buyumlarga ehtiyotkor munosabatni taʼminlaydi. Yashirin nuqsonlar, notoʻgʻri yorliqlar yoki Buyurtmachi koʻrsatmagan xususiyatlar tufayli yuzaga kelgan natijalar uchun javobgarlik cheklanishi mumkin.",
+            "Shikoyatlar buyumni qabul qilgan kundan boshlab 24 soat ichida qabul qilinadi.",
+          ],
+        },
+        {
+          heading: "5. Aloqa",
+          paragraphs: [
+            "Manzil: Toshkent sh., Maxtumquli koʻchasi, 136. Telefon: +998 93 570 51 50. Email: info@tanzif.uz.",
+          ],
+        },
+      ],
+    },
+    privacy: {
+      title: "Maxfiylik siyosati",
+      updated: "Yangilangan: 2026-yil 1-yanvar",
+      sections: [
+        {
+          heading: "1. Qanday maʼlumotlarni yigʻamiz",
+          paragraphs: [
+            "Ism, telefon raqami, manzil, buyurtma tarixi, toʻlov holati va sayt bilan oʻzaro aloqa maʼlumotlari (texnik loglar) yigʻilishi mumkin.",
+            "Maʼlumotlar xizmatni bajarish, aloqa qilish, toʻlovni qayta ishlash va sifatni yaxshilash uchun ishlatiladi.",
+          ],
+        },
+        {
+          heading: "2. Qanday himoyalaymiz",
+          paragraphs: [
+            "Biz maʼlumotlarga ruxsatsiz kirishni cheklash, xavfsiz kanallar va ichki tartib-qoidalar orqali himoya choralarini qoʻllaymiz.",
+            "Maʼlumotlar qonuniy asosda, xizmat koʻrsatish uchun zarur boʻlgan muddat davomida saqlanadi.",
+          ],
+        },
+        {
+          heading: "3. Uchinchi tomonlar",
+          paragraphs: [
+            "Toʻlov tizimlari, kuryer va IT-hamkorlarga faqat buyurtmani bajarish uchun zarur maʼlumotlar uzatilishi mumkin.",
+            "Biz maʼlumotlarni reklama maqsadida uchinchi shaxslarga sotmaymiz.",
+          ],
+        },
+        {
+          heading: "4. Sizning huquqlaringiz",
+          paragraphs: [
+            "Siz oʻz maʼlumotlaringizni koʻrish, yangilash yoki oʻchirishni soʻrash huquqiga egasiz. Soʻrovlar: info@tanzif.uz yoki +998 93 570 51 50.",
+          ],
+        },
+      ],
+    },
+    terms: {
+      title: "Foydalanish shartlari",
+      updated: "Yangilangan: 2026-yil 1-yanvar",
+      sections: [
+        {
+          heading: "1. Saytdan foydalanish",
+          paragraphs: [
+            "Sayt va onlayn xizmatlar Oʻzbekiston Respublikasi qonunchiligiga muvofiq taqdim etiladi. Foydalanuvchi toʻgʻri maʼlumot kiritishga va xizmatdan qonuniy maqsadlarda foydalanishga rozilik bildiradi.",
+          ],
+        },
+        {
+          heading: "2. Kabinet va buyurtmalar",
+          paragraphs: [
+            "Shaxsiy kabinetga kirish maʼlumotlari maxfiy saqlanadi. Buyurtma holati AGBIS va ichki tizimlar orqali kuzatilishi mumkin.",
+            "Notoʻgʻri yoki firibgarlik bilan bogʻliq harakatlar aniqlansa, buyurtma bekor qilinishi yoki cheklovlar qoʻllanilishi mumkin.",
+          ],
+        },
+        {
+          heading: "3. Intellektual mulk",
+          paragraphs: [
+            "TANZIF brendi, dizayn, matnlar va media materiallari himoyalangan. Ruxsatsiz nusxa koʻchirish taqiqlanadi.",
+          ],
+        },
+        {
+          heading: "4. Oʻzgarishlar",
+          paragraphs: [
+            "Shartlar yangilanishi mumkin. Yangi tahrir saytda eʼlon qilingan paytdan kuchga kiradi. Muhim oʻzgarishlar haqida foydalanuvchilar xabardor qilinishi mumkin.",
+          ],
+        },
+      ],
+    },
   },
 };
 
@@ -1059,6 +1169,116 @@ export const oz: Dict = {
     toTop: "Юқорига",
     integration: "АГБИС билан интеграция",
     rights: "© 2026 TANZIF. Барча ҳуқуқлар ҳимояланган.",
+    legalTitle: "Ҳужжатлар",
+    offer: "Оммавий оферта",
+    privacy: "Махфийлик сиёсати",
+    terms: "Фойдаланиш шартлари",
+  },
+  legal: {
+    offer: {
+      title: "Оммавий оферта",
+      updated: "Янгиланган: 2026-йил 1-январ",
+      sections: [
+        {
+          heading: "1. Умумий қоидалар",
+          paragraphs: [
+            "Ушбу оммавий оферта («Оферта») TANZIF («Ижрочи») томонидан жисмоний ва юридик шахсларга («Буюртмачи») химчистка, ювиш, етказиб бериш ва боғлиқ онлайн хизматларни кўрсатиш шартларини белгилайди.",
+            "Сайт ёки мобил каналлари орқали буюртма бериш Офертанинг тўлиқ қабул қилинганлигини англатади.",
+          ],
+        },
+        {
+          heading: "2. Хизматлар ва буюртма",
+          paragraphs: [
+            "Хизматларнинг рўйхати, муддатлари ва нархлари сайтда ёки оператор орқали кўрсатилади. Якуний нарх буюмни кўздан кечиргандан сўнг аниқланиши мумкин.",
+            "Буюртмачи буюм ҳолати, доғлар ва махсус талаблар ҳақида тўғри маълумот беришга мажбур.",
+          ],
+        },
+        {
+          heading: "3. Тўлов ва етказиб бериш",
+          paragraphs: [
+            "Тўлов нақд, пластик карта ёки онлайн тўлов тизимлари (Click, Payme, Uzum, Humo, Uzcard ва бошқалар) орқали амалга оширилади.",
+            "Курьер орқали олиб кетиш ва етказиб бериш хизмати алоҳида шартлар ва зоналари бўйича кўрсатилади.",
+          ],
+        },
+        {
+          heading: "4. Жавобгарлик",
+          paragraphs: [
+            "Ижрочи буюмларга эҳтиёткор муносабатни таъминлайди. Яширин нуқсонлар, нотўғри ёрлиқлар ёки Буюртмачи кўрсатмаган хусусиятлар туфайли юзага келган натижалар учун жавобгарлик чекланиши мумкин.",
+            "Шикоятлар буюмни қабул қилган кундан бошлаб 24 соат ичида қабул қилинади.",
+          ],
+        },
+        {
+          heading: "5. Алоқа",
+          paragraphs: [
+            "Манзил: Тошкент ш., Махтумқули кўчаси, 136. Телефон: +998 93 570 51 50. Email: info@tanzif.uz.",
+          ],
+        },
+      ],
+    },
+    privacy: {
+      title: "Махфийлик сиёсати",
+      updated: "Янгиланган: 2026-йил 1-январ",
+      sections: [
+        {
+          heading: "1. Қандай маълумотларни йиғамиз",
+          paragraphs: [
+            "Исм, телефон рақами, манзил, буюртма тарихи, тўлов ҳолати ва сайт билан ўзаро алоқа маълумотлари (техник логлар) йиғилиши мумкин.",
+            "Маълумотлар хизматни бажариш, алоқа қилиш, тўловни қайта ишлаш ва сифатни яхшилаш учун ишлатилади.",
+          ],
+        },
+        {
+          heading: "2. Қандай ҳимоялаймиз",
+          paragraphs: [
+            "Биз маълумотларга рухсатсиз киришни чеклаш, хавфсиз каналлари ва ички тартиб-қоидалар орқали ҳимоя чораларини қўллаймиз.",
+            "Маълумотлар қонуний асосда, хизмат кўрсатиш учун зарур бўлган муддат давомида сақланади.",
+          ],
+        },
+        {
+          heading: "3. Учинчи томонлар",
+          paragraphs: [
+            "Тўлов тизимлари, курьер ва IT-ҳамкорларга фақат буюртмани бажариш учун зарур маълумотлар узатилиши мумкин.",
+            "Биз маълумотларни реклама мақсадида учинчи шахсларга сотмаймиз.",
+          ],
+        },
+        {
+          heading: "4. Сизнинг ҳуқуқларингиз",
+          paragraphs: [
+            "Сиз ўз маълумотларингизни кўриш, янгилаш ёки ўчиришни сўраш ҳуқуқига эгасиз. Сўровлар: info@tanzif.uz ёки +998 93 570 51 50.",
+          ],
+        },
+      ],
+    },
+    terms: {
+      title: "Фойдаланиш шартлари",
+      updated: "Янгиланган: 2026-йил 1-январ",
+      sections: [
+        {
+          heading: "1. Сайтдан фойдаланиш",
+          paragraphs: [
+            "Сайт ва онлайн хизматлар Ўзбекистон Республикаси қонунчилигига мувофиқ тақдим этилади. Фойдаланувчи тўғри маълумот киритишга ва хизматдан қонуний мақсадларда фойдаланишга розилик билдиради.",
+          ],
+        },
+        {
+          heading: "2. Кабинет ва буюртмалар",
+          paragraphs: [
+            "Шахсий кабинетга кириш маълумотлари махфий сақланади. Буюртма ҳолати АГБИС ва ички тизимлар орқали кузатилиши мумкин.",
+            "Нотўғри ёки фирибгарлик билан боғлиқ ҳаракатлар аниқланса, буюртма бекор қилиниши ёки чекловлар қўлланилиши мумкин.",
+          ],
+        },
+        {
+          heading: "3. Интеллектуал мулк",
+          paragraphs: [
+            "TANZIF бренди, дизайн, матнлар ва медиа материаллари ҳимояланган. Рухсатсиз нусха кўчириш тақиқланади.",
+          ],
+        },
+        {
+          heading: "4. Ўзгаришлар",
+          paragraphs: [
+            "Шартлар янгиланиши мумкин. Янги таҳрир сайтда эълон қилинган пайтдан кучга киради. Муҳим ўзгаришлар ҳақида фойдаланувчилар хабардор қилиниши мумкин.",
+          ],
+        },
+      ],
+    },
   },
 };
 
@@ -1589,6 +1809,116 @@ export const ru: Dict = {
     toTop: "Наверх",
     integration: "Интеграция с АГБИС",
     rights: "© 2026 TANZIF. Все права защищены.",
+    legalTitle: "Документы",
+    offer: "Публичная оферта",
+    privacy: "Политика конфиденциальности",
+    terms: "Условия использования",
+  },
+  legal: {
+    offer: {
+      title: "Публичная оферта",
+      updated: "Обновлено: 1 января 2026 г.",
+      sections: [
+        {
+          heading: "1. Общие положения",
+          paragraphs: [
+            "Настоящая публичная оферта («Оферта») определяет условия оказания TANZIF («Исполнитель») услуг химчистки, стирки, доставки и связанных онлайн-сервисов физическим и юридическим лицам («Заказчик»).",
+            "Оформление заказа через сайт или мобильные каналы означает полное принятие Оферты.",
+          ],
+        },
+        {
+          heading: "2. Услуги и заказ",
+          paragraphs: [
+            "Перечень услуг, сроки и цены указываются на сайте или оператором. Итоговая стоимость может быть уточнена после осмотра изделия.",
+            "Заказчик обязан предоставить достоверную информацию о состоянии изделия, пятнах и особых требованиях.",
+          ],
+        },
+        {
+          heading: "3. Оплата и доставка",
+          paragraphs: [
+            "Оплата производится наличными, картой или через онлайн-платёжные системы (Click, Payme, Uzum, Humo, Uzcard и др.).",
+            "Курьерский забор и доставка оказываются по отдельным условиям и зонам обслуживания.",
+          ],
+        },
+        {
+          heading: "4. Ответственность",
+          paragraphs: [
+            "Исполнитель обеспечивает бережное обращение с изделиями. Ответственность может быть ограничена при скрытых дефектах, неверной маркировке или свойствах, не указанных Заказчиком.",
+            "Претензии принимаются в течение 24 часов с момента получения изделия.",
+          ],
+        },
+        {
+          heading: "5. Контакты",
+          paragraphs: [
+            "Адрес: г. Ташкент, ул. Махтумкули, 136. Телефон: +998 93 570 51 50. Email: info@tanzif.uz.",
+          ],
+        },
+      ],
+    },
+    privacy: {
+      title: "Политика конфиденциальности",
+      updated: "Обновлено: 1 января 2026 г.",
+      sections: [
+        {
+          heading: "1. Какие данные мы собираем",
+          paragraphs: [
+            "Могут собираться имя, номер телефона, адрес, история заказов, статус оплаты и технические данные взаимодействия с сайтом (логи).",
+            "Данные используются для оказания услуг, связи, обработки платежей и улучшения качества сервиса.",
+          ],
+        },
+        {
+          heading: "2. Как мы защищаем данные",
+          paragraphs: [
+            "Мы применяем меры защиты: ограничение доступа, безопасные каналы передачи и внутренние регламенты.",
+            "Данные хранятся на законных основаниях в течение срока, необходимого для оказания услуг.",
+          ],
+        },
+        {
+          heading: "3. Третьи стороны",
+          paragraphs: [
+            "Платёжным системам, курьерам и IT-партнёрам могут передаваться только данные, необходимые для исполнения заказа.",
+            "Мы не продаём персональные данные третьим лицам в рекламных целях.",
+          ],
+        },
+        {
+          heading: "4. Ваши права",
+          paragraphs: [
+            "Вы вправе запросить доступ, обновление или удаление своих данных. Обращения: info@tanzif.uz или +998 93 570 51 50.",
+          ],
+        },
+      ],
+    },
+    terms: {
+      title: "Условия использования",
+      updated: "Обновлено: 1 января 2026 г.",
+      sections: [
+        {
+          heading: "1. Использование сайта",
+          paragraphs: [
+            "Сайт и онлайн-сервисы предоставляются в соответствии с законодательством Республики Узбекистан. Пользователь соглашается вводить достоверные данные и использовать сервис в законных целях.",
+          ],
+        },
+        {
+          heading: "2. Кабинет и заказы",
+          paragraphs: [
+            "Данные доступа в личный кабинет хранятся конфиденциально. Статус заказа может отслеживаться через АГБИС и внутренние системы.",
+            "При выявлении недостоверных или мошеннических действий заказ может быть отменён, а доступ ограничен.",
+          ],
+        },
+        {
+          heading: "3. Интеллектуальная собственность",
+          paragraphs: [
+            "Бренд TANZIF, дизайн, тексты и медиаматериалы защищены. Несанкционированное копирование запрещено.",
+          ],
+        },
+        {
+          heading: "4. Изменения",
+          paragraphs: [
+            "Условия могут обновляться. Новая редакция вступает в силу с момента публикации на сайте. О существенных изменениях пользователи могут быть уведомлены.",
+          ],
+        },
+      ],
+    },
   },
 };
 

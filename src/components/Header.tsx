@@ -48,7 +48,6 @@ export function Header() {
       { id: "calc", label: t.nav.prices },
       { id: "business", label: t.nav.business },
       { id: "club", label: t.nav.club },
-      { id: "concierge", label: t.nav.ai },
       { id: "knowledge", label: t.nav.knowledge },
     ],
     [t],

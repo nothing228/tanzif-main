@@ -70,14 +70,14 @@ export function Gallery() {
 
   return (
     <section className="section section--white gallery-section" id="gallery">
-      <div className="container">
+      <div className="container reveal-stagger" ref={ref}>
         <div className="section-head">
           <SectionTag num="05" label={t.module} icon={<CareIron size={18} />} />
           <h2>{t.gallery.title}</h2>
           <p>{t.gallery.lead}</p>
         </div>
 
-        <div className="gallery reveal" ref={ref}>
+        <div className="gallery">
           <div className="gallery__filters" role="tablist" aria-label={t.gallery.title}>
             {GALLERY_KEYS.map((key) => (
               <button

@@ -1,6 +1,6 @@
 .hero {
   position: relative;
-  /* full screen, minus nothing — the fixed header sits on top of it */
+  /* full screen — the fixed header sits on top of it */
   min-height: 100vh;
   min-height: 100dvh;
   display: flex;
@@ -9,46 +9,65 @@
   padding-bottom: 48px;
   overflow: hidden;
 
-  /* full-bleed photo backdrop */
-  &__bg {
+  &__carousel {
     position: absolute;
     inset: 0;
-    background-image: url("/hero-laundry.jpg");
-    background-size: cover;
-    background-position: center;
     pointer-events: none;
   }
 
-  /* Opacity is measured, not eyeballed: sampled against this photo, bare text
-     drops to 1:1 on the dark drum openings (42% of the copy area under 4.5:1).
-     0.65 light / 0.68 dark clears WCAG everywhere; the right half stays open. */
+  &__slide {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    opacity: 0;
+    transform: scale(1.04);
+    transition:
+      opacity 1.1s cubic-bezier(0.4, 0, 0.2, 1),
+      transform 6s cubic-bezier(0.25, 0.1, 0.25, 1);
+    will-change: opacity, transform;
+
+    &.is-active {
+      opacity: 1;
+      transform: scale(1);
+      z-index: 1;
+    }
+
+    /* adaptive focal points — keep key subjects in frame on crop */
+    &:nth-child(1) {
+      background-position: 58% center;
+    }
+    &:nth-child(2) {
+      background-position: 62% center;
+    }
+    &:nth-child(3) {
+      background-position: 55% center;
+    }
+    &:nth-child(4) {
+      background-position: 65% center;
+    }
+  }
+
+  /* ~45% dark overlay + directional gradients for copy / partners */
   &__scrim {
     position: absolute;
     inset: 0;
+    z-index: 2;
     pointer-events: none;
-    background: linear-gradient(
-      100deg,
-      rgba(242, 247, 246, 0.78) 0%,
-      rgba(242, 247, 246, 0.74) 60%,
-      rgba(242, 247, 246, 0.4) 74%,
-      rgba(242, 247, 246, 0.18) 88%,
-      rgba(242, 247, 246, 0.06) 100%
-    );
-
-    :root[data-theme="dark"] & {
-      background: linear-gradient(
+    background:
+      linear-gradient(180deg, rgba(10, 9, 8, 0.18) 0%, rgba(10, 9, 8, 0.55) 55%, rgba(10, 9, 8, 0.78) 100%),
+      linear-gradient(
         100deg,
-        rgba(10, 9, 8, 0.82) 0%,
-        rgba(10, 9, 8, 0.78) 60%,
-        rgba(10, 9, 8, 0.42) 74%,
-        rgba(10, 9, 8, 0.2) 88%,
-        rgba(10, 9, 8, 0.1) 100%
+        rgba(10, 9, 8, 0.72) 0%,
+        rgba(10, 9, 8, 0.5) 48%,
+        rgba(10, 9, 8, 0.38) 100%
       );
-    }
   }
 
   &__inner {
     position: relative;
+    z-index: 3;
     flex: 1;
     display: flex;
     align-items: center;
@@ -60,21 +79,24 @@
 
   &__foot {
     position: relative;
+    z-index: 3;
   }
 
-  /* two full sentences now, so the display size backs off and the measure
-     is capped — the old 4.6rem was tuned for a four-word headline */
   &__title {
-    font-size: clamp(2rem, 4.4vw, 3.4rem);
-    line-height: 1.12;
-    max-width: 24ch;
+    font-size: clamp(2.4rem, 5.2vw, 4.6rem);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+    max-width: 20ch;
     margin-bottom: 24px;
+    color: var(--on-deep);
+    text-shadow: 0 2px 30px rgba(0, 0, 0, 0.35);
     animation: hero-in 0.8s ease both;
   }
 
   &__sub {
     font-size: clamp(1.02rem, 1.4vw, 1.2rem);
-    color: var(--muted);
+    color: var(--muted-dark);
     max-width: 620px;
     margin-bottom: 34px;
     animation: hero-in 0.8s 0.12s ease both;
@@ -91,7 +113,6 @@
     gap: 8px;
   }
 
-  /* the arrow leads the eye out of the button on hover */
   &__cta-arrow {
     flex-shrink: 0;
     transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
@@ -101,6 +122,72 @@
     transform: translateX(4px);
   }
 
+  /* arrows + dots */
+  &__nav {
+    position: absolute;
+    right: clamp(16px, 3vw, 40px);
+    bottom: clamp(120px, 18vh, 180px);
+    z-index: 4;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  &__arrow {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #f4ecdc;
+    background: rgba(10, 9, 8, 0.45);
+    border: 1px solid rgba(211, 171, 92, 0.45);
+    backdrop-filter: blur(8px);
+    transition:
+      background 0.2s ease,
+      border-color 0.2s ease,
+      transform 0.2s ease;
+
+    &:hover {
+      background: rgba(211, 171, 92, 0.22);
+      border-color: var(--aqua);
+      transform: scale(1.04);
+    }
+
+    &:active {
+      transform: scale(0.96);
+    }
+  }
+
+  &__dots {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 4px;
+  }
+
+  &__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: rgba(244, 236, 220, 0.35);
+    border: 1px solid rgba(211, 171, 92, 0.35);
+    transition:
+      width 0.35s ease,
+      background 0.35s ease,
+      border-color 0.35s ease;
+
+    &.is-active {
+      width: 28px;
+      background: var(--aqua);
+      border-color: var(--aqua);
+    }
+
+    &:hover:not(.is-active) {
+      background: rgba(244, 236, 220, 0.55);
+    }
+  }
 }
 
 @keyframes hero-in {
@@ -114,7 +201,6 @@
   }
 }
 
-
 @media (max-width: 900px) {
   .hero {
     min-height: auto;
@@ -125,24 +211,45 @@
       padding-bottom: 44px;
     }
 
-    /* copy spans the full width here, and cover crops the photo harder, so the
-       scrim turns vertical and stays a touch stronger than on desktop */
     &__scrim {
       background: linear-gradient(
         185deg,
-        rgba(242, 247, 246, 0.78) 0%,
-        rgba(242, 247, 246, 0.7) 55%,
-        rgba(242, 247, 246, 0.45) 100%
+        rgba(10, 9, 8, 0.78) 0%,
+        rgba(10, 9, 8, 0.62) 45%,
+        rgba(10, 9, 8, 0.72) 100%
       );
+    }
 
-      :root[data-theme="dark"] & {
-        background: linear-gradient(
-          185deg,
-          rgba(10, 9, 8, 0.82) 0%,
-          rgba(10, 9, 8, 0.74) 55%,
-          rgba(10, 9, 8, 0.5) 100%
-        );
+    &__slide {
+      &:nth-child(1) {
+        background-position: 70% 40%;
+      }
+      &:nth-child(2) {
+        background-position: 75% 35%;
+      }
+      &:nth-child(3) {
+        background-position: 60% 45%;
+      }
+      &:nth-child(4) {
+        background-position: 72% 40%;
       }
     }
+
+    &__nav {
+      position: relative;
+      right: auto;
+      bottom: auto;
+      z-index: 4;
+      justify-content: center;
+      margin: 8px auto 20px;
+      order: 0;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__slide {
+    transition: opacity 0.35s ease;
+    transform: none !important;
   }
 }
