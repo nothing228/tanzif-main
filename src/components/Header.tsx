@@ -46,6 +46,7 @@ export function Header() {
       { id: "pickup", label: t.nav.calc },
       { id: "tracking", label: t.nav.process },
       { id: "calc", label: t.nav.prices },
+      { id: "gallery", label: t.nav.gallery },
       { id: "business", label: t.nav.business },
       { id: "club", label: t.nav.club },
       { id: "knowledge", label: t.nav.knowledge },

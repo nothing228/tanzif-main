@@ -33,6 +33,7 @@ export function Footer() {
     { id: "services", label: t.nav.services },
     { id: "calc", label: t.nav.prices },
     { id: "pickup", label: t.nav.calc },
+    { id: "gallery", label: t.nav.gallery },
     { id: "club", label: t.nav.club },
     { id: "business", label: t.nav.business },
     { id: "knowledge", label: t.nav.knowledge },
@@ -104,15 +105,17 @@ export function Footer() {
               </AnchorLink>
             ))}
           </div>
+
+          <div className="footer__col">
+            <h4>{t.footer.legalTitle}</h4>
+            <Link to="/offer">{t.footer.offer}</Link>
+            <Link to="/privacy">{t.footer.privacy}</Link>
+            <Link to="/terms">{t.footer.terms}</Link>
+          </div>
         </div>
 
         <div className="footer__bottom">
           <span>{t.footer.rights}</span>
-          <nav className="footer__legal" aria-label={t.footer.legalTitle}>
-            <Link to="/offer">{t.footer.offer}</Link>
-            <Link to="/privacy">{t.footer.privacy}</Link>
-            <Link to="/terms">{t.footer.terms}</Link>
-          </nav>
         </div>
       </div>
 
