@@ -1,93 +1,89 @@
 .partners {
-  border-top: 1px solid var(--line);
   padding-top: 22px;
 
-  &__label {
-    display: block;
-    font-size: 0.72rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    /* the hero is a dark island in both themes, so the label goes light */
-    color: var(--on-deep);
-    margin-bottom: 14px;
-  }
-
-  &__viewport {
-    overflow: hidden;
-    mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
-  }
-
-  &__track {
+  /* ---- desktop: static, edge to edge ---- */
+  &__row {
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     align-items: center;
-    width: max-content;
-    gap: 0;
-    animation: partners-marquee 40s linear infinite;
-    will-change: transform;
-
-    &:hover,
-    &:active {
-      animation-play-state: paused;
-    }
+    justify-content: space-between;
+    gap: clamp(18px, 2.4vw, 34px) clamp(20px, 2.6vw, 40px);
+    /* break out of the container and run the full viewport width */
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    padding-inline: clamp(24px, 4vw, 72px);
   }
 
-  &__set {
-    display: flex;
-    flex-wrap: nowrap;
-    align-items: center;
-    gap: 10px;
-    /* trailing gap so the seam between copies matches item spacing */
-    padding-right: 10px;
-  }
-
-  /* Each logo carries its own background — a blue square, a navy square, a
-     black circle, a couple of photographs. The tile normalises that so the row
-     reads as one strip instead of twelve mismatched cut-outs. */
+  /* No tiles — logos keep their own colours and sit straight on the hero.
+     Vector logos have had their backgrounds stripped; the couple of raster
+     ones carry their own backdrop. */
   &__item {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    height: 78px;
-    padding: 10px 16px;
-    border-radius: 12px;
-    background: var(--white);
-    border: 1px solid var(--line);
-    transition: border-color 0.25s ease, transform 0.25s ease;
 
     img {
       display: block;
-      max-height: 100%;
+      /* explicit height — SVGs have no pixel intrinsic size and collapse to 0
+         as a flex item otherwise */
+      height: 52px;
       width: auto;
-      max-width: 140px;
+      max-width: 170px;
       object-fit: contain;
+      opacity: 0.92;
+      transition: opacity var(--dur-base) var(--ease-out),
+        transform var(--dur-base) var(--ease-out);
     }
 
-    &:hover {
-      border-color: var(--aqua-deep);
+    &:hover img {
+      opacity: 1;
       transform: translateY(-2px);
+    }
+
+    /* duplicate set only exists for the mobile marquee loop */
+    &--dup {
+      display: none;
     }
   }
 }
 
+/* ---- mobile: marquee ---- */
 @media (max-width: 900px) {
   .partners {
     &__viewport {
-      margin-inline: -24px;
+      overflow: hidden;
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
     }
 
-    &__track {
-      animation-duration: 36s;
+    &__row {
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      width: max-content;
+      margin-left: 0;
+      padding-inline: 0;
+      gap: 0;
+      animation: partners-marquee 26s linear infinite;
+
+      &:hover,
+      &:active {
+        animation-play-state: paused;
+      }
     }
 
     &__item {
-      height: 60px;
-      padding: 8px 14px;
+      /* spacing via padding so the -50% loop stays seamless */
+      padding-inline: 18px;
+
+      &--dup {
+        display: inline-flex;
+      }
 
       img {
-        max-width: 120px;
+        height: 40px;
+        max-width: 130px;
       }
     }
   }
@@ -103,23 +99,14 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .partners {
-    &__viewport {
+  .partners__row {
+    animation: none !important;
+  }
+
+  @media (max-width: 900px) {
+    .partners__viewport {
       overflow-x: auto;
       scrollbar-width: none;
-      mask-image: none;
-
-      &::-webkit-scrollbar {
-        display: none;
-      }
-    }
-
-    &__track {
-      animation: none !important;
-    }
-
-    &__set[aria-hidden="true"] {
-      display: none;
     }
   }
 }

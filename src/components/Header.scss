@@ -116,11 +116,11 @@
   &__nav {
     display: flex;
     align-items: center;
-    gap: clamp(11px, 1.25vw, 20px);
+    gap: clamp(13px, 1.5vw, 24px);
     min-width: 0;
 
     a {
-      font-size: 0.86rem;
+      font-size: 0.98rem;
       font-weight: 500;
       white-space: nowrap;
       color: color-mix(in srgb, var(--ink) 72%, var(--muted));

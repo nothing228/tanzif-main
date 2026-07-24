@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 420">
+
+<g transform="translate(280,145)">
+<path d="M0,-95 L-55,0 L-41,0 Z" fill="#7a5a17"></path><path d="M0,-95 L-47.142857142857146,0 L-33.142857142857146,0 Z" fill="#8f6b1e"></path><path d="M0,-95 L-39.285714285714285,0 L-25.285714285714285,0 Z" fill="#a47f28"></path><path d="M0,-95 L-31.42857142857143,0 L-17.42857142857143,0 Z" fill="#b99433"></path><path d="M0,-95 L-23.571428571428573,0 L-9.571428571428573,0 Z" fill="#cdaa42"></path><path d="M0,-95 L-15.714285714285715,0 L-1.7142857142857153,0 Z" fill="#e0c058"></path><path d="M0,-95 L-7.857142857142861,0 L6.142857142857139,0 Z" fill="#f0d878"></path><path d="M0,-95 L0,0 L14,0 Z" fill="#fdeaa0"></path>
+</g>
+<line x1="70" y1="230" x2="430" y2="230" stroke="#d8b957" stroke-width="2"></line>
+<line x1="70" y1="236" x2="430" y2="236" stroke="#d8b957" stroke-width="1"></line>
+<text x="250" y="285" font-family="Georgia, &#39;Times New Roman&#39;, serif" font-weight="700" font-size="46" fill="#fff" text-anchor="middle" letter-spacing="6">SV HOTEL</text>
+<line x1="70" y1="305" x2="430" y2="305" stroke="#d8b957" stroke-width="1"></line>
+<line x1="70" y1="311" x2="430" y2="311" stroke="#d8b957" stroke-width="2"></line>
+<g fill="#d8b957">
+<path id="star" d="M0,-10 L2.9,-3.1 L10,-3.1 L4.3,1.2 L6.5,8 L0,3.8 L-6.5,8 L-4.3,1.2 L-10,-3.1 L-2.9,-3.1 Z"></path>
+<use href="#star" transform="translate(220,335)"></use>
+<use href="#star" transform="translate(250,335)"></use>
+<use href="#star" transform="translate(280,335)"></use>
+</g>
+</svg>

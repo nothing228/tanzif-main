@@ -133,6 +133,15 @@
   }
 }
 
+/* below 900px the AI widget rises to bottom:84px (h:54) and shifts to
+   right:16px — lift the scroll-to-top button clear above it, same edge */
+@media (max-width: 900px) {
+  .footer__totop {
+    right: 16px;
+    bottom: 164px;
+  }
+}
+
 @media (max-width: 1100px) {
   .footer__grid {
     grid-template-columns: 1fr 1fr 1fr;

@@ -1,32 +1,28 @@
-import { useLang } from "../i18n/LangContext";
 import { PARTNERS } from "../data/partners";
 import "./Partners.scss";
 
-function PartnerItems({ duplicate = false }: { duplicate?: boolean }) {
-  return (
-    <ul className="partners__set" aria-hidden={duplicate || undefined}>
-      {PARTNERS.map((p) => (
-        <li key={`${duplicate ? "dup-" : ""}${p.file}`} className="partners__item">
-          {/* above the fold — no lazy loading, they must be there on paint */}
-          <img src={`/partners/${p.file}`} alt={duplicate ? "" : p.name} title={p.name} />
-        </li>
-      ))}
-    </ul>
-  );
-}
-
-/** Client logo strip, sitting where the hero stats used to be. */
+/**
+ * Client logos. Desktop lays them out static across the full width; below 900px
+ * the row turns into a marquee, so the duplicate set is rendered for a seamless
+ * loop and hidden on desktop.
+ */
 export function Partners() {
-  const { t } = useLang();
-
   return (
     <div className="partners">
-      <span className="partners__label">{t.hero.partners}</span>
       <div className="partners__viewport">
-        <div className="partners__track">
-          <PartnerItems />
-          <PartnerItems duplicate />
-        </div>
+        <ul className="partners__row">
+          {PARTNERS.map((p) => (
+            <li key={p.file} className="partners__item">
+              {/* above the fold — no lazy loading, they must be there on paint */}
+              <img src={`/partners/${p.file}`} alt={p.name} title={p.name} />
+            </li>
+          ))}
+          {PARTNERS.map((p) => (
+            <li key={`dup-${p.file}`} className="partners__item partners__item--dup" aria-hidden>
+              <img src={`/partners/${p.file}`} alt="" />
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );

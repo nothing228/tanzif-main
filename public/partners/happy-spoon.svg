@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 360">
+
+<circle cx="150" cy="150" r="118" fill="none" stroke="#4d6b4a" stroke-width="3"></circle>
+<circle cx="150" cy="150" r="104" fill="none" stroke="#4d6b4a" stroke-width="3"></circle>
+<g transform="translate(150,110)" stroke="#4d6b4a" stroke-width="5" fill="none" stroke-linecap="round">
+<path d="M-18 -30 L-18 5 M-24 -30 L-24 -5 M-12 -30 L-12 -5 M-18 5 L-18 40"></path>
+<path d="M18 -30 C30 -30 30 -8 18 -2 L18 40" fill="none"></path>
+</g>
+<circle cx="138" cy="120" r="4" fill="#4d6b4a" stroke="none"></circle>
+<circle cx="162" cy="120" r="4" fill="#4d6b4a" stroke="none"></circle>
+<text x="150" y="205" font-family="Georgia, serif" font-weight="700" font-size="27" fill="#3f5b3d" text-anchor="middle" letter-spacing="1">HAPPY SPOON</text>
+<text x="150" y="222" font-family="Arial, sans-serif" font-size="9" fill="#8a8a7a" text-anchor="middle" letter-spacing="3">ГАСТРОБАР</text>
+</svg>

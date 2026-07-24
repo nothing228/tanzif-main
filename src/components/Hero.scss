@@ -96,7 +96,7 @@
 
   &__sub {
     font-size: clamp(1.02rem, 1.4vw, 1.2rem);
-    color: var(--muted-dark);
+    color: #fff;
     max-width: 620px;
     margin-bottom: 34px;
     animation: hero-in 0.8s 0.12s ease both;
@@ -235,14 +235,9 @@
       }
     }
 
+    /* no carousel controls on phones — single still, no auto-advance */
     &__nav {
-      position: relative;
-      right: auto;
-      bottom: auto;
-      z-index: 4;
-      justify-content: center;
-      margin: 8px auto 20px;
-      order: 0;
+      display: none;
     }
   }
 }
